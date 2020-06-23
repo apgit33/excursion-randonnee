@@ -15,17 +15,40 @@ function connect() {
 
 }
 
-function takeAll($query,$val1,$val2) {
-    try {
-        $co = connect();		
-        $sth = $co->prepare($query);
-        ($val1!='') ? $sth->bindParam(1,$val1):'';
-        ($val2!='') ? $sth->bindParam(2,$val2):'';
-        $sth->execute();
-    } catch(PDOException $e) {
-        $msg = 'ERREUR PDO dans ' . $e->getFile() . ' Ligne.' . $e->getLine() . ' : <br>' . $e->getMessage();
-        die($msg);
-    }
+function doIt2($query,$val1,$val2) {
+
+    $co = connect();		
+    $sth = $co->prepare($query);
+    ($val1!='') ? $sth->bindParam(1,$val1):'';
+    ($val2!='') ? $sth->bindParam(2,$val2):'';
+    $sth->execute();
+
+    return $sth;
+}
+
+function doIt6($query,$val1,$val2,$val3,$val4,$val5,$val6) {
+
+    $co = connect();		
+    $sth = $co->prepare($query);
+    $sth->bindParam(1,$val1);
+    $sth->bindParam(2,$val2);
+    $sth->bindParam(3,$val3);
+    $sth->bindParam(4,$val4);
+    $sth->bindParam(5,$val5);
+    $sth->bindParam(6,$val6);
+    $sth->execute();
+
+    return $sth;
+}
+
+function doIt4($query,$val1,$val2,$val3,$val4){
+    $co = connect();		
+    $sth = $co->prepare($query);
+    $sth->bindParam(1,$val1);
+    $sth->bindParam(2,$val2);
+    $sth->bindParam(3,$val3);
+    $sth->bindParam(4,$val4);
+    $sth->execute();
 
     return $sth;
 }
