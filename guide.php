@@ -1,92 +1,135 @@
 <?php
-include 'header.php';
+session_start();
 
-if(isset($_POST['delete'])) {
-    $query = "DELETE FROM `guide` WHERE numero_guide = ?";
-    $reponse = doIt2($query,$_POST['delete'],'');
-}
+if (!isset($_SESSION["admin"]) || $_SESSION["admin"]===false){
+    header('Location: index.php');
+    exit;
+}else{
+    $action = (isset($_GET['action']))? $_GET['action']:'list';
+    require_once 'bdd.php';
+    require_once 'function.php';
+    include 'header.php';
+    if(isset($_POST['delete'])) {
+        $query = "DELETE FROM `nc_guide` WHERE g_numero = ?";
+        $reponse = doIt2($query,$_POST['delete'],'');
+    }
 
 
-if(isset($_POST['modify'])) {
+    if(isset($_POST['modify'])) {
 
-    $query = "UPDATE `guide` SET `nom_guide` = ?,`telephone` = ? WHERE `numero_guide` = ?";
-    doIt4($query,$_POST['nom_guide'],$_POST['telephone'],$_POST['modify'],'');
-}
+        $query = "UPDATE `nc_guide` SET `g_nom` = ?,`g_telephone` = ? WHERE `g_numero` = ?";
+        doIt4($query,$_POST['nom_guide'],$_POST['telephone'],$_POST['modify'],'');
+    }
 
-if(isset($_POST['add_entry'])) {
-    $query = "INSERT INTO `guide` (`nom_guide`,`telephone`) VALUES (?,?)";
-    doIt2($query,$_POST['nom_guide'],$_POST['telephone']);
-}
+    if(isset($_POST['add_entry'])) {
+        $query = "INSERT INTO `nc_guide` (`g_nom`,`g_telephone`) VALUES (?,?)";
+        doIt2($query,$_POST['nom_guide'],$_POST['telephone']);
+    }
 
-if(isset($_POST['add'])) {
-    $content = "<form action='' method='post' id='edit_form'>
-                    <label for='nom_guide'>Nom</label>
-                    <input type='text' name='nom_guide' id='nom_guide'>         
-                    
-                    <label for='telephone'>Telephone</label>
-                    <input type='text' name='telephone' id='telephone'>
-
-                    <button type ='submit' class='button' name='add_entry'>Ajouter</button>
-                    <button type ='submit' class='button'>Annuler</button>
-                </form>";
-} elseif(isset($_POST['edit'])) {
-
-    $query = "SELECT * FROM `guide` WHERE numero_guide = ?";
-    $reponse = doIt2($query,$_POST['edit'],'');
-    
-    if ($donnees = $reponse->fetch()) {
+    if($action =='add') {
+        $title = "<h2 class='title is-2'>Ajout d'un guide</h2>";
         $content = "
             <form action='' method='post' id='edit_form'>
-                <label for='nom_guide'>Nom</label>
-                <input type='text' name='nom_guide' id='nom_guide' value='".$donnees['nom_guide']."'>         
-                
-                <label for='telephone'>telephone</label>
-                <input type='text' name='telephone' id='telephone' value='".$donnees['telephone']."'>";
-                $content .=  "
-                <button type ='submit' class='button' name='modify' value='".$donnees['numero_guide']."'>Modifier</button>
-                <button type ='submit' class='button'>Annuler</button>
+                <div class='field'>
+                    <label for='nom_guide' class='label'>Nom :</label>
+                    <div class='control'>
+                        <input class='input' type='text' name='nom_guide' id='nom_guide'>         
+                    </div>
+                </div>
+                <div class='field'>
+                    <label for='telephone' class='label'>Telephone :</label>
+                    <div class='control'>
+                        <input class='input' type='text' name='telephone' id='telephone'>
+                    </div>
+                </div>
+                <div class='field is-grouped'>
+                    <div class='control'>
+                        <button type ='submit' class='button is-success' name='add_entry'>Ajouter</button>
+                    </div>
+                    <div class='control'>
+                        <button type ='submit' class='button is-danger'>Annuler</button>
+                    </div>
+                </div>
             </form>";
-    }
-} else {
+    } elseif(isset($_POST['edit'])) {
 
-    $content = "
-            <form action='' method='post'>
-            <button type ='submit' class='button' name='add'>Ajout</button>
-            </form>
-            <table>
-                <thead>
-                <tr>
-                <th>Numéro</th>
-                <th>Nom</th>
-                <th>Telephone</th>
-                </tr>
-                </thead>
-                <tbody>
-                ";
-
-                $query = "SELECT * FROM `guide` ORDER BY `nom_guide`";
-
-                $reponse = doIt2($query,'','');
-                
-                while ($donnees = $reponse->fetch()) {
-                    $id=$donnees['numero_guide'];
-                    $content .= "
-                    <tr>
-                        <th>".$id." </th>
-                        <th>".$donnees['nom_guide']." </th>
-                        <th>".$donnees['telephone']." </th>
-                        <th>
-                            <form action='' method='post'>
-                                <button type ='submit' class='button' name='edit' value='$id'>Editer</button>
-                                <button type ='submit' class='button' name='delete' value='$id'>Supprimer</button>
-                            </form>
-                        </th>
-                    </tr>
+        $query = "SELECT g_numero, g_nom, g_telephone FROM `nc_guide` WHERE g_numero = ?";
+        $reponse = doIt2($query,$_POST['edit'],'');
+        
+        if ($donnees = $reponse->fetch()) {
+            $title = "<h2 class='title is-2'>Edition du guide ".$donnees['g_nom'].", n ° : ".$donnees['g_numero']."</h2>";
+            $content = "
+                <form action='' method='post' id='edit_form'>
+                    <div class='field'>
+                        <label for='nom_guide' class='label'>Nom</label>
+                        <div class='control'>
+                            <input class='input' type='text' name='nom_guide' id='nom_guide' value='".$donnees['g_nom']."'>         
+                        </div>
+                    </div>
+                    <div class='field'>
+                        <label for='telephone' class='label'>telephone</label>
+                        <div class='control'>
+                            <input class='input' type='text' name='telephone' id='telephone' value='".$donnees['g_telephone']."'>
+                        </div>
+                    </div>
+                    <div class='field is-grouped'>
+                        <div class='control'>
+                            <button type ='submit' class='button is-success' name='modify' value='".$donnees['g_numero']."'>Modifier</button>
+                        </div>
+                        <div class='control'>
+                            <button type ='submit' class='button is-danger'>Annuler</button>
+                        </div>
+                    </div>
+                </form>";
+        }
+    } else {
+        $title = "<h2 class='title is-2'>Affichage des guides</h2>";
+        $content = "
+                <table class='table is-mobile is-striped'>
+                    <thead>
+                        <tr>
+                            <th>Numéro</th>
+                            <th>Nom</th>
+                            <th>Telephone</th>
+                        </tr>
+                    </thead>
+                    <tbody>
                     ";
-                }
-                $content .= "</table>";
-            }
 
-echo $content;
+                    $query = "SELECT g_numero, g_nom, g_telephone FROM `nc_guide` ORDER BY `g_nom`";
+
+                    $reponse = doIt2($query,'','');
+                    
+                    while ($donnees = $reponse->fetch()) {
+                        $id=$donnees['g_numero'];
+                        $content .= "
+                        <tr>
+                            <th class='is-vcentered'>".$id." </th>
+                            <th class='is-vcentered'>".$donnees['g_nom']." </th>
+                            <th class='is-vcentered'>".$donnees['g_telephone']." </th>
+                            <th>
+                                <form action='' method='post'>
+                                    <div class='field is-grouped'>
+                                        <div class='control'>
+                                            <button type ='submit' class='button is-success' name='edit' value='$id'>Edit</button>
+                                        </div>
+                                        <div class='control'>
+                                            <button type ='submit' class='button is-danger' onclick=\"return confirm('Are u sure, there is no rolling back !!');\" name='delete' value='$id'>Delete</button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </th>
+                        </tr>
+                        ";
+                    }
+        $content .= "</table>";
+    }   
+}
+
+echo "
+    <div class='column'>
+        $title
+        $content
+    </div>";
 
 include 'footer.php';
