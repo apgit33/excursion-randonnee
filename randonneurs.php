@@ -1,119 +1,168 @@
 <?php
-include 'header.php';
+session_start();
+if (!isset($_SESSION["admin"]) || $_SESSION["admin"]===false){
+    header('Location: index.php');
+    exit;
+}else{
+    $action = (isset($_GET['action']))? $_GET['action']:'list';
+    require_once 'bdd.php';
+    require_once 'function.php';
+    include 'header.php';
 
-if(isset($_POST['delete'])) {
-    $query = "DELETE FROM `randonneur` WHERE id_randonneur = ?";
-    // $reponse = doIt2($query,$_POST['delete'],'');
-}
+    if(isset($_POST['delete'])) {
+        $query = "DELETE FROM `nc_randonneur` WHERE r_id = ?";
+        $query2 = "DELETE FROM `nc_booking` WHERE b_r_id = ?";
 
-if(isset($_POST['modify'])) {
-    $_admin = (isset($_POST['_admin']))? '1': '0';
+        doIt2($query,$_POST['delete'],'');
+        doIt2($query2,$_POST['delete'],'');
+    }
 
-    $query = "UPDATE `randonneur` SET `nom_randonneur` = ?,`prenom_randonneur` = ?,`email_randonneur` = ?,`password_randonneur` = ?, `_admin`= ? WHERE `id_randonneur` = ?";
+    if(isset($_POST['modify'])) {
 
-    doIt6($query,$_POST['nom_randonneur'],$_POST['prenom_randonneur'],$_POST['email_randonneur'],$_POST['password_randonneur'],$_admin,$_POST['modify']);
-}
+        $query = "UPDATE `nc_randonneur` SET `r_nom` = ?,`r_prenom` = ?,`r_email` = ?,`r_password` = ? WHERE `r_id` = ?";
 
-if(isset($_POST['add_entry'])) {
-    $_admin = (isset($_POST['_admin']))? '1': '0';
+        doIt6($query,$_POST['nom_randonneur'],$_POST['prenom_randonneur'],$_POST['email_randonneur'],$_POST['password_randonneur'],$_POST['modify'],'');
+    }
 
-    $query = "INSERT INTO `randonneur` (`nom_randonneur`,`prenom_randonneur`,`email_randonneur`,`password_randonneur`) VALUES (?,?,?,?)";
-    doIt4($query,$_POST['nom_randonneur'],$_POST['prenom_randonneur'],$_POST['email_randonneur'],$_POST['password_randonneur']);
-}
+    if(isset($_POST['add_entry'])) {
+
+        $query = "INSERT INTO `nc_randonneur` (`r_nom`,`r_prenom`,`r_email`,`r_password`) VALUES (?,?,?,?)";
+        doIt4($query,$_POST['nom_randonneur'],$_POST['prenom_randonneur'],$_POST['email_randonneur'],$_POST['password_randonneur']);
+    }
 
 
 
-if(isset($_POST['add'])) {
-    $content = "<form action='' method='post' id='edit_form'>
-                    <label for='nom_randonneur'>Nom</label>
-                    <input type='text' name='nom_randonneur' id='nom_randonneur'>         
-                    
-                    <label for='prenom_randonneur'>Prenom</label>
-                    <input type='text' name='prenom_randonneur' id='prenom_randonneur'>
-
-                    <label for='email_randonneur'>Email</label>
-                    <input type='email' name='email_randonneur' id='email_randonneur'>
-
-                    <label for='password_randonneur'>password</label>
-                    <input type='password' name='password_randonneur' id='password_randonneur'>
-    
-                    <button type ='submit' class='button' name='add_entry'>Ajouter</button>
-                    <button type ='submit' class='button'>Annuler</button>
-                </form>";
-} elseif(isset($_POST['edit'])) {
-        $query = "SELECT * FROM `randonneur` WHERE id_randonneur = ?";
-        $reponse = doIt2($query,$_POST['edit'],'');
-        
-        if ($donnees = $reponse->fetch()) {
-            $content = "
-                <form action='' method='post' id='edit_form'>
-                    <label for='nom_randonneur'>Nom</label>
-                    <input type='text' name='nom_randonneur' id='nom_randonneur' value='".$donnees['nom_randonneur']."'>         
-                    
-                    <label for='prenom_randonneur'>Prenom</label>
-                    <input type='text' name='prenom_randonneur' id='prenom_randonneur' value='".$donnees['prenom_randonneur']."'>
-
-                    <label for='email_randonneur'>Email</label>
-                    <input type='email' name='email_randonneur' id='email_randonneur' value='".$donnees['email_randonneur']."'>
-
-                    <label for='password_randonneur'>password</label>
-                    <input type='password' name='password_randonneur' id='password_randonneur' value='".$donnees['password_randonneur']."'>
-    
-                    <label for='admin'>Admin</label>
-                    <input type='checkbox' name='_admin[]' value='1' id='admin'";
-                    $content .=  ($donnees['_admin']==1)? "checked='checked'> ":">";
-                    
-                    
-                    $content .=  "
-                    <button type ='submit' class='button' name='modify' value='".$donnees['id_randonneur']."'>Modifier</button>
-                    <button type ='submit' class='button'>Annuler</button>
-                </form>";
-        }
-    } else {
-
+    if($action =='add') {
+        $title = "<h2 class='title is-2'>Ajout d'un randonneur</h2>";
         $content = "
-            <form action='' method='post'>
-            <button type ='submit' class='button' name='add'>Ajout</button>
-            </form>
-            <table>
-                <thead>
-                <tr>
-                <th>Nom</th>
-                <th>Prenom</th>
-                <th>Email</th>
-                <th>Password</th>
-                <th>Admin</th>
-                <th>Action</th>
-                </tr>
-                </thead>
-                <tbody>
-                ";
-
-                $query = "SELECT * FROM `randonneur` ORDER BY `nom_randonneur`";
-
-                $reponse = doIt2($query,'','');
-                
-                while ($donnees = $reponse->fetch()) {
-                    $content .= "
-                    <tr>
-                        <th>".$donnees['nom_randonneur']." </th>
-                        <th>".$donnees['prenom_randonneur']." </th>
-                        <th>".$donnees['email_randonneur']." </th>
-                        <th>".$donnees['password_randonneur']." </th>
-                        <th>".$donnees['_admin']." </th>
-                        <th>
-                            <form action='' method='post'>
-                                <button type ='submit' class='button' name='edit' value='".$donnees['id_randonneur']."'>Editer</button>
-                                <button type ='submit' class='button' name='delete' value='".$donnees['id_randonneur']."'>Supprimer</button>
-                            </form>
-                        </th>
-                    </tr>
+        <form action='' method='post' id='edit_form'>
+            <div class='field'>
+                <label for='nom_randonneur'>Nom :</label>
+                <div class='control'>
+                    <input type='text' name='nom_randonneur' id='nom_randonneur' class='input'>         
+                </div>
+            </div>    
+            <div class='field'>
+                <label for='prenom_randonneur'>Prenom :</label>
+                <div class='control'>
+                    <input type='text' name='prenom_randonneur' id='prenom_randonneur' class='input'>
+                </div>
+            </div>    
+            <div class='field'>
+                <label for='email_randonneur'>Email :</label>
+                <div class='control'>
+                    <input type='email' name='email_randonneur' id='email_randonneur' class='input'>
+                </div>
+            </div> 
+            <div class='field'>
+            <label for='password_randonneur'>password :</label>
+                <div class='control'>
+                    <input type='password' name='password_randonneur' id='password_randonneur' class='input'>
+                </div>
+            </div> 
+            <div class='field is-grouped'>
+                <div class='control'>
+                    <button type ='submit' class='button is-success' name='add_entry'>Ajouter</button>
+                </div>
+                <div class='control'>
+                    <button type ='reset' class='button is-danger'>Reset</button>
+                </div>
+            </div>
+        </form>";
+    } elseif(isset($_POST['edit'])) {
+            $query = "SELECT * FROM `nc_randonneur` WHERE r_id = ?";
+            $reponse = doIt2($query,$_POST['edit'],'');
+            
+            if ($donnees = $reponse->fetch()) {
+                $title = "<h2 class='title is-2'>Edition de ".$donnees['r_nom']." ".$donnees['r_prenom']."</h2>";
+                $content = "
+                    <form action='' method='post' id='edit_form'>
+                        <div class='field'>
+                            <label for='nom_randonneur'>Nom :</label>
+                            <div class='control'>
+                                <input class='input' type='text' name='nom_randonneur' id='nom_randonneur' value='".$donnees['r_nom']."'>         
+                            </div>
+                        </div>
+                        <div class='field'>
+                            <label for='prenom_randonneur'>Prenom :</label>
+                            <div class='control'>
+                                <input class='input' type='text' name='prenom_randonneur' id='prenom_randonneur' value='".$donnees['r_prenom']."'>
+                            </div>
+                        </div>
+                        <div class='field'>
+                            <label for='email_randonneur'>Email :</label>
+                            <div class='control'>
+                                <input class='input' type='email' name='email_randonneur' id='email_randonneur' value='".$donnees['r_email']."'>
+                            </div>
+                        </div>
+                        <div class='field'>
+                            <label for='password_randonneur'>Password :</label>
+                            <div class='control'>
+                                <input class='input' type='password' name='password_randonneur' id='password_randonneur' value='".$donnees['r_password']."'>
+                            </div>
+                        </div>
+                        <div class='field is-grouped'>
+                            <div class='control'>
+                                <button type ='submit' class='button is-success' name='modify' value='".$donnees['r_id']."'>Modifier</button>
+                            </div>
+                            <div class='control'>
+                                <button type ='submit' class='button is-danger'>Annuler</button>
+                            </div>
+                        </div>
+                    </form>";
+            }
+        } else {
+            $title = "<h2 class='title is-2'>Affichage des randonneurs</h2>";
+            $content = " 
+                <table class='table is-mobile is-striped'>
+                    <thead>
+                        <tr>
+                            <th>Nom</th>
+                            <th>Prenom</th>
+                            <th>Email</th>
+                            <th>Password</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
                     ";
-                }
-                $content .= "</table>";
 
+                    $query = "SELECT * FROM `nc_randonneur` ORDER BY `r_nom`";
 
-        }
+                    $reponse = doIt2($query,'','');
+                    
+                    while ($donnees = $reponse->fetch()) {
+                        $content .= "
+                        <tr>
+                            <th class='is-vcentered'>".$donnees['r_nom']." </th>
+                            <th class='is-vcentered'>".$donnees['r_prenom']." </th>
+                            <th class='is-vcentered'>".$donnees['r_email']." </th>
+                            <th class='is-vcentered'>".$donnees['r_password']." </th>
+                            <th>
+                                <form action='' method='post'>
+                                    <div class='field is-grouped'>
+                                        <div class='control'>
+                                            <button type ='submit' class='button is-rounded is-success' name='edit' value='".$donnees['r_id']."'>Edit</button>
+                                        </div>
+                                        <div class='control'>
+                                            <button type ='submit' class='button is-rounded is-danger' onclick=\"return confirm('Are u sure, there is no rolling back !!');\" name='delete' value='".$donnees['r_id']."'>Delete</button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </th>
+                        </tr>
+                        ";
+                    }
+                    $content .= "</table>";
 
-echo $content;
+                    ?>
+                  <?php
+            }
+}
+echo "
+    <div class='column'>
+        $title
+        $content
+    </div>";
+ 
 include 'footer.php';
