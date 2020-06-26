@@ -11,12 +11,13 @@ if (!isset($_SESSION["admin"]) || $_SESSION["admin"]===false){
     include 'header.php';
     if(isset($_POST['delete'])) {
         $query = "DELETE FROM `nc_guide` WHERE g_numero = ?";
-        $reponse = doIt2($query,$_POST['delete'],'');
+        doIt2($query,$_POST['delete'],'');     
+        $query = "DELETE FROM `nc_guidemeneexcursion` WHERE g_numero = ?";
+        doIt2($query,$_POST['delete'],'');
     }
 
 
     if(isset($_POST['modify'])) {
-
         $query = "UPDATE `nc_guide` SET `g_nom` = ?,`g_telephone` = ? WHERE `g_numero` = ?";
         doIt4($query,$_POST['nom_guide'],$_POST['telephone'],$_POST['modify'],'');
     }
@@ -47,7 +48,7 @@ if (!isset($_SESSION["admin"]) || $_SESSION["admin"]===false){
                         <button type ='submit' class='button is-success' name='add_entry'>Ajouter</button>
                     </div>
                     <div class='control'>
-                        <button type ='submit' class='button is-danger'>Annuler</button>
+                        <button type ='submit' class='button is-danger'>Reset</button>
                     </div>
                 </div>
             </form>";
