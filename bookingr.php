@@ -70,7 +70,7 @@ if($action =='add') {
     ";
 
 }else {
-    $title = "<h2 class='title is-2'>Gestion des réservations</h2>";
+    $title = "<h2 class='title is-2'>Gestion des réservations pour les randonneurs</h2>";
             $content = " 
             <form action='' method='GET'>
                 <div class='field'>
