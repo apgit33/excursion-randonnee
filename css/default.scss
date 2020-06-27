@@ -1,0 +1,57 @@
+.columns,table {
+    margin: auto;
+}
+
+.card {
+    width: 320px;
+    margin: auto;
+    margin-bottom: 40px;
+    margin-right: 10px;
+}
+
+.d-flex {
+    display: flex;
+    flex-wrap: wrap;
+}
+.d-centered {
+    justify-content: center;
+    align-items: center;
+}
+.jc-between {
+    justify-content: space-between;
+}
+h1 {margin-left: 10px;}
+
+
+// #form-login {
+//     padding: 30px;
+//     border: 1px solid #f1f1f1;
+//     background: #fff;
+//     box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
+//     // margin-top: 50%;
+//     input[type=text], input[type=password] {
+//         width: 100%;
+//         padding: 12px 20px;
+//         margin: 8px 0;
+//         display: inline-block;
+//         border: 1px solid #ccc;
+//         box-sizing: border-box;
+//     }
+//     input[type=submit] {
+//         background-color: #53af57;
+//         color: white;
+//         // padding: 14px 20px;
+//         margin: 8px 0;
+//         border: none;
+//         cursor: pointer;
+//         width: 100%;
+//     }
+//     input[type=submit]:hover {
+//         // background-color: rgba(110, 106, 106, 0.705);
+//         // color: #ffffff;
+//         // border: 1px inset #53af57;
+//     }
+
+// }
+
+
