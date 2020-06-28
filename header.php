@@ -76,7 +76,7 @@
                         <li>
                             Profile
                             <ul>
-                                <li><a href='excursion_list.php?action=edit'>Edit your profile</a></li>
+                                <li><a href='dashboard.php?action=edit'>Edit your profile</a></li>
                             </ul>
                         </li>
                     </ul>

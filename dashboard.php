@@ -47,10 +47,11 @@ if(isset($_SESSION['admin']) && $_SESSION['admin']===true){
             </div>
         </div>
     </div>
-<?php }else {?>
+<?php }elseif (isset($_GET['action'])=='edit') {
+        include 'dashboard-edit.php';
+        }else {?>
     
     <div class='column'>
-
         <div class='card card_user'>
             <div class='card-image'>
                 <figure class='image is-4by3'>
@@ -80,5 +81,10 @@ if(isset($_SESSION['admin']) && $_SESSION['admin']===true){
     } else {
         header('Location: index.php');
         exit;
-    }
-include 'footer.php';
+    }?>
+    </div>       
+    </main>
+    <script src='https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js'></script>
+    <script src='./src/edit-profile.js'></script>
+</body>
+</html>
