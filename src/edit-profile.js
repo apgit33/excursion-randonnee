@@ -19,8 +19,6 @@ if(form) {
                 let champ = document.createElement("li");
                 //On affecte la valeur de l'élément créé
                 champ.innerHTML = data;
-                // console.log(data.Erreur);
-                
                 //On ajoute en noeud enfant à la datalist l'option créé
                 verif.appendChild(champ);
                 });

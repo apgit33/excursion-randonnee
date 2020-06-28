@@ -1,6 +1,5 @@
 const addForm = document.getElementById("add_form");
 const editForm = document.getElementById("edit_form");
-const deleteForm = document.getElementById("edit_form");
 const verif = document.getElementById("verif");
 
 if(addForm) {
@@ -21,12 +20,9 @@ if(addForm) {
                 let champ = document.createElement("li");
                 //On affecte la valeur de l'élément créé
                 champ.innerHTML = data;
-                // console.log(data.Erreur);
-                
                 //On ajoute en noeud enfant à la datalist l'option créé
                 verif.appendChild(champ);
-                });
-                
+            });
         });
     });
 }
@@ -48,12 +44,9 @@ if(editForm) {
                 let champ = document.createElement("li");
                 //On affecte la valeur de l'élément créé
                 champ.innerHTML = data;
-                // console.log(data.Erreur);
-                
                 //On ajoute en noeud enfant à la datalist l'option créé
                 verif.appendChild(champ);
-                });
-                
+            });
         });
     });
 }
