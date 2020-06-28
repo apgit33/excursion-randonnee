@@ -6,7 +6,6 @@ $erreurs[] ='';
 $email = (isset($_POST['email']) ? $_POST['email']:"");
 $password = (isset($_POST['password']) ? $_POST['password']:"");
 
-
 if ($email !='' && $password != '') {
     $query = "SELECT u_admin FROM `nc_user` WHERE u_email = ? AND u_password = ?";
     $reponse = executeSQL($query,array($email,$password));

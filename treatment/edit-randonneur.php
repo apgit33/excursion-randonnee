@@ -37,9 +37,8 @@ $array= (!empty($erreurs)) ? implode(',', $erreurs) : 0;
 
 if (empty($array)) {
     $query = "UPDATE `nc_randonneur` SET `r_nom` = ?,`r_prenom` = ?,`r_email` = ?,`r_password` = ? WHERE `r_id` = ?";
-    executeSQL($query,array($_POST['nom_randonneur'],$_POST['prenom_randonneur'],$_POST['email_randonneur'],$_POST['password_randonneur'],$_POST['id']));
+    executeSQL($query,array($nom,$prenom,$email,$pwd,$_POST['id']));
     $validation = true;
-
 }
 
 echo json_encode(array('validation' => $validation,'erreurs' => $erreurs));
