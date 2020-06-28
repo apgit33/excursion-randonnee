@@ -6,6 +6,7 @@ if (!isset($_SESSION["admin"]) || $_SESSION["admin"]===false){
 }else{
     $id = (isset($_GET['id']))? $_GET['id']:'';
     $action = (isset($_GET['action']))? $_GET['action']:'list';
+    $erreurs ='';
 
     require_once 'bdd.php';
     require_once 'function.php';
@@ -13,29 +14,37 @@ if (!isset($_SESSION["admin"]) || $_SESSION["admin"]===false){
 
 if(isset($_POST['delete'])) {
     if ($_POST['type']=='r') {
-        // $query = "DELETE FROM `nc_booking` WHERE `b_e_id` = ? AND b_r_id = ?";
-        // doIt2($query,$id,$_POST['delete']); 
+        $query = "DELETE FROM `nc_booking` WHERE `b_e_id` = ? AND b_r_id = ?";
+        executeSQL($query,array($id,$_POST['delete'])); 
     } else if ($_POST['type']=='g') {
-        // var_dump($id);
         $query = "DELETE FROM `nc_guidemeneexcursion` WHERE `ge_e_id` = ? AND ge_g_numero = ?";
-        doIt2($query,$id,$_POST['delete']); 
-
+        executeSQL($query,array($id,$_POST['delete'])); 
     }
 }
 
 if(isset($_POST['book'])){
     if ($_GET['type']=='r') {
-        $query = "INSERT INTO nc_booking VALUE (?,?)";
-        doIt2($query,$_POST['book'],$id);     
+        $max=0;
+        $query = "SELECT (SELECT `e_randonneurs_max` FROM `nc_excursion` WHERE `e_id`= ?) - count(r_id) as nombre_restant FROM `nc_randonneur` INNER JOIN nc_booking ON r_id = b_r_id WHERE b_e_id = ? ";
+        $reponse = executeSQL($query,array($id,$id));
+        while($donnees = $reponse->fetch()) {
+            $max = $donnees['nombre_restant'];
+        }
+        if($max>0) {
+            $query = "INSERT INTO nc_booking VALUE (?,?)";
+            executeSQL($query,array($_POST['book'],$id));     
+        }else{
+            $erreurs = "Désolé, il n'y a plus de places disponibles pour cette excursion";
+        }
     } else if ($_GET['type']=='g') {
         $query = "INSERT INTO nc_guidemeneexcursion VALUE (?,?)";
-        doIt2($query,$id,$_POST['book']);     
+        executeSQL($query,array($id,$_POST['book']));     
     }
 }
 
-if($action =='add') {
+if($action =='add' && isset($_GET['id']) && isset($_GET['type'])) {
     $query = "SELECT e_nom FROM nc_excursion WHERE e_id = ?";
-    $reponse = doIt2($query,$id,'');
+    $reponse = executeSQL($query,array($id));
     while ($donnees2 = $reponse->fetch()){
         $e_nom = $donnees2['e_nom'];
     }
@@ -62,7 +71,7 @@ if($action =='add') {
             <tbody>
             ";
                     $query = "SELECT r_id,r_nom,r_prenom, r_email FROM nc_randonneur LEFT JOIN nc_booking ON r_id = b_r_id AND b_e_id = ? WHERE b_r_id IS NULL"; 
-                    $reponse = doIt2($query,$id,'');
+                    $reponse = executeSQL($query,array($id));
                     while ($donnees = $reponse->fetch()) {
                         $content .= "
                         <tr>
@@ -106,7 +115,7 @@ if($action =='add') {
             <tbody>
             ";
                     $query = "SELECT g_numero,g_nom,g_telephone FROM nc_guide LEFT JOIN nc_guidemeneexcursion ON g_numero = ge_g_numero AND ge_e_id = ? WHERE ge_e_id IS NULL"; 
-                    $reponse = doIt2($query,$id,'');
+                    $reponse = executeSQL($query,array($id));
                     while ($donnees = $reponse->fetch()) {
                         $content .= "
                         <tr>
@@ -142,7 +151,7 @@ if($action =='add') {
                     <div class='control'>
                         <div class='select'>
                             <select name='id' id='id'>";
-                    $reponse = doIt2("SELECT `e_nom`,`e_id` FROM `nc_excursion` ORDER BY `e_nom` ASC ",'','');
+                    $reponse = executeSQL("SELECT `e_nom`,`e_id` FROM `nc_excursion` ORDER BY `e_nom` ASC ",array());
                     while ($donnees2 = $reponse->fetch()){
                         $content .= "<option value ='".$donnees2['e_id']."'";
                         if ($donnees2['e_id'] == $id) {
@@ -161,6 +170,12 @@ if($action =='add') {
             </form>
   ";
             if($id) {
+                $max=0;
+                $query = "SELECT (SELECT `e_randonneurs_max` FROM `nc_excursion` WHERE `e_id`= ?) - count(r_id) as nombre_restant FROM `nc_randonneur` INNER JOIN nc_booking ON r_id = b_r_id WHERE b_e_id = ? ";
+                $reponse = executeSQL($query,array($id,$id));
+                while($donnees = $reponse->fetch()) {
+                    $max = $donnees['nombre_restant'];
+                }
                 $content .= "
                 <div class='table-container'>    
                         <table class='table is-mobile is-striped'>
@@ -173,8 +188,9 @@ if($action =='add') {
                                     <th>Nom</th>
                                     <th>Prenom</th>
                                     <th>Email</th>
-                                    <th>Action</th>
-                                    <th>
+                                    <th>Action</th>";
+                                    if($max>0) {
+                                        $content.= "<th>
                                         <div class='field'>
                                             <form action='' method='get'>
                                                 <div class='field'>
@@ -190,13 +206,17 @@ if($action =='add') {
                                                 </div>
                                             </form>
                                         </div>
-                                    </th>
+                                    </th>";
+                                    }
+                                    $content.= "
                                 </tr>
                             </thead>
                             <tbody>
                             ";
+
+
                 $query = "SELECT r_id,r_nom,r_prenom,r_email FROM `nc_randonneur` INNER JOIN nc_booking ON r_id = b_r_id WHERE b_e_id = ?";
-                $reponse = doIt2($query,$id,'');
+                $reponse = executeSQL($query,array($id));
                 $i = 1;
                 while ($donnees = $reponse->fetch()) {
                     
@@ -258,7 +278,7 @@ if($action =='add') {
                             <tbody>
                             ";
                 $query = "SELECT g_nom,g_numero FROM `nc_guide` INNER JOIN nc_guidemeneexcursion ON g_numero = ge_g_numero WHERE ge_e_id = ?";
-                $reponse = doIt2($query,$id,'');
+                $reponse = executeSQL($query,array($id));
                 $i = 1;
                 while ($donnees = $reponse->fetch()) {
                     
@@ -284,21 +304,17 @@ if($action =='add') {
                     $i++;
                 }
                 $content .= "</table>";
-
-
-
-
-
-
             }
-
-
         }
-        }
-echo "
-    <div class='column'>
-        $title
-        $content
-    </div>";
- 
-include 'footer.php';
+    }
+            echo "
+            <div class='column'>
+            <div class='verif'>$erreurs</div>
+                $title
+                $content
+                </div>   
+                        </div>       
+                    </div>       
+                    </main>
+            </body>
+        </html>";
