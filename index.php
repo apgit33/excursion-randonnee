@@ -38,13 +38,13 @@ if(isset($_SESSION['login']) && $_SESSION['login']===true){
                 <div class='field'>
                     <label for='email' class='label'>Email :</label>
                     <div class='control'>
-                        <input class='input' type='email' name='email'  placeholder='Enter your email' id='email'  >
+                        <input class='input' type='email' name='email'  placeholder='Enter your email' id='email' required >
                     </div>
                 </div>
                 <div class='field'>
                     <label for='password' class='label'>Password :</label>
                     <div class='control'>
-                        <input class="input" type='password' name='password' placeholder='Enter your password' id='password' >
+                        <input class="input" type='password' name='password' placeholder='Enter your password' id='password' required>
                     </div>
                 </div>
                 <div class='field'>
@@ -53,7 +53,7 @@ if(isset($_SESSION['login']) && $_SESSION['login']===true){
                     </div>
                 </div>
             </form>
-            <div id='verif'></div>
+            <div id='checklogin' class='verif'></div>
         </div>
     </div>
                  </div>  

@@ -26,14 +26,14 @@ if (!isset($_SESSION["admin"]) || $_SESSION["admin"]===false){
                 <div class='field'>
                     <label for='nom_guide' class='label'>First Name :</label>
                     <div class='control'>
-                        <input class='input' type='text' name='nom_guide' id='nom_guide'>         
+                        <input class='input' type='text' name='nom_guide' id='nom_guide' required>         
                     </div>
                     <div id='checkfirstname' class='verif'></div>
                 </div>
                 <div class='field'>
                     <label for='telephone' class='label'>Phone :</label>
                     <div class='control'>
-                        <input class='input' type='text' name='telephone' id='telephone'>
+                        <input class='input' type='text' name='telephone' id='telephone' required>
                     </div>
                     <div id='checkphone' class='verif'></div>
                 </div>
@@ -61,14 +61,14 @@ if (!isset($_SESSION["admin"]) || $_SESSION["admin"]===false){
                     <div class='field'>
                         <label for='nom_guide' class='label'>First Name</label>
                         <div class='control'>
-                            <input class='input' type='text' name='nom_guide' id='nom_guide' value='".$donnees['g_nom']."'>         
+                            <input class='input' type='text' name='nom_guide' id='nom_guide' value='".$donnees['g_nom']."' required>         
                         </div>
                         <div id='checkfirstname' class='verif'></div>
                     </div>
                     <div class='field'>
                         <label for='telephone' class='label'>Phone</label>
                         <div class='control'>
-                            <input class='input' type='text' name='telephone' id='telephone' value='".$donnees['g_telephone']."'>
+                            <input class='input' type='text' name='telephone' id='telephone' value='".$donnees['g_telephone']."' required>
                         </div>
                         <div id='checkphone' class='verif'></div>
                     </div>

@@ -32,7 +32,7 @@ if (!isset($_SESSION["admin"]) || $_SESSION["admin"]===false){
             <div class='field'>
                 <label for='nom_excursion' class='label'>Name :</label>
                 <div class='control'>
-                    <input type='text' name='nom_excursion' id='nom_excursion' class='input'>         
+                    <input type='text' name='nom_excursion' id='nom_excursion' class='input' required>         
                 </div>
                 <div id='checkfirstname' class='verif'></div>
             </div>
@@ -40,7 +40,7 @@ if (!isset($_SESSION["admin"]) || $_SESSION["admin"]===false){
                 <label for='point_depart_excursion' class='label'>Starting point :</label>
                 <div class='control'>
                     <div class='select'>
-                        <select name='point_depart_excursion' id='point_depart_excursion'>$region</select>
+                        <select name='point_depart_excursion' id='point_depart_excursion' required>$region</select>
                     </div>
                 </div>
             </div>
@@ -48,35 +48,35 @@ if (!isset($_SESSION["admin"]) || $_SESSION["admin"]===false){
                 <label for='point_arrive_excursion' class='label'>End point :</label>
                 <div class='control'>
                     <div class='select'>
-                        <select name='point_arrive_excursion' id='point_arrive_excursion'>$region</select>
+                        <select name='point_arrive_excursion' id='point_arrive_excursion' required>$region</select>
                     </div>
                 </div>
             </div>
             <div class='field'>
                 <label for='tarif_excursion' class='label'>Price €:</label>
                 <div class='control'>
-                    <input class='input' type='number' name='tarif_excursion' id='tarif_excursion'>
+                    <input class='input' type='number' name='tarif_excursion' id='tarif_excursion' required>
                 </div>
                 <div id='checktarif' class='verif'></div>
             </div>
             <div class='field'>
                 <label for='randonneurs_max_excursion' class='label'>Hikers max :</label>
                 <div class='control'>
-                    <input class='input' type='number' name='randonneurs_max_excursion' id='randonneurs_max_excursion'>     
+                    <input class='input' type='number' name='randonneurs_max_excursion' id='randonneurs_max_excursion' required>     
                 </div>
                 <div id='checkmax' class='verif'></div>
             </div>
             <div class='field'>
                 <label for='date_depart_excursion' class='label'>Start :</label>
                 <div class='control'>
-                    <input class='input' type='date' name='date_depart_excursion' id='date_depart_excursion'>  
+                    <input class='input' type='date' name='date_depart_excursion' id='date_depart_excursion' required>  
                 </div>
                 <div id='checkdp' class='verif'></div>
             </div>
             <div class='field'>
                 <label for='date_arrivee_excursion' class='label'>End :</label>
                 <div class='control'>
-                    <input class='input' type='date' name='date_arrivee_excursion' id='date_arrivee_excursion'>  
+                    <input class='input' type='date' name='date_arrivee_excursion' id='date_arrivee_excursion' required>  
                 </div>
                 <div id='checkda' class='verif'></div>
             </div>
@@ -120,7 +120,7 @@ if (!isset($_SESSION["admin"]) || $_SESSION["admin"]===false){
                 <div class='field'>
                     <label for='nom_excursion' class='label'>Name :</label>
                     <div class='control'>
-                        <input class='input' type='text' name='nom_excursion' id='nom_excursion' value='".$donnees['e_nom']."'>         
+                        <input class='input' type='text' name='nom_excursion' id='nom_excursion' value='".$donnees['e_nom']."' required>         
                     </div>
                     <div id='checkfirstname' class='verif'></div>
                 </div>
@@ -128,7 +128,7 @@ if (!isset($_SESSION["admin"]) || $_SESSION["admin"]===false){
                     <label for='point_depart_excursion' class='label'>Starting point :</label>
                     <div class='control'>
                         <div class='select'>
-                            <select name='point_depart_excursion' id='point_depart_excursion'>    
+                            <select name='point_depart_excursion' id='point_depart_excursion' required>    
                     ";
                 $reponse = executeSQL("SELECT DISTINCT `d_nom` FROM `nc_district` ORDER BY `d_nom`",array());
                 while ($donnees2 = $reponse->fetch()){
@@ -146,7 +146,7 @@ if (!isset($_SESSION["admin"]) || $_SESSION["admin"]===false){
                     <label for='point_arrive_excursion' class='label'>End point :</label>
                     <div class='control'>
                         <div class='select'>
-                            <select name='point_arrive_excursion' id='point_arrive_excursion'>";
+                            <select name='point_arrive_excursion' id='point_arrive_excursion' required>";
                 $reponse = executeSQL("SELECT DISTINCT `d_nom` FROM `nc_district` ORDER BY `d_nom`",array());
                 while ($donnees2 = $reponse->fetch()){
                     $content .= "<option value ='".$donnees2['d_nom']."'";
@@ -162,28 +162,28 @@ if (!isset($_SESSION["admin"]) || $_SESSION["admin"]===false){
                 <div class='field'>
                     <label for='tarif_excursion' class='label'>Price € :</label>
                     <div class='control'>
-                        <input class='input' type='number' name='tarif_excursion' id='tarif_excursion' value='".$donnees['e_tarif']."'>
+                        <input class='input' type='number' name='tarif_excursion' id='tarif_excursion' value='".$donnees['e_tarif']."' required>
                     </div>
                     <div id='checktarif' class='verif'></div>
                 </div>
                 <div class='field'>
                     <label for='randonneurs_max_excursion' class='label'>Hikers max :</label>
                     <div class='control'>
-                        <input class='input' type='number' name='randonneurs_max_excursion' id='randonneurs_max_excursion' value='".$donnees['e_randonneurs_max']."'>     
+                        <input class='input' type='number' name='randonneurs_max_excursion' id='randonneurs_max_excursion' value='".$donnees['e_randonneurs_max']."' required>     
                         </div>
                         <div id='checkmax' class='verif'></div>
                     </div>
                 <div class='field'>
                     <label for='date_depart_excursion' class='label'>Start :</label>
                     <div class='control'>
-                        <input class='input' type='date' name='date_depart_excursion' id='date_depart_excursion' value='".$donnees['e_date_depart']."'>
+                        <input class='input' type='date' name='date_depart_excursion' id='date_depart_excursion' value='".$donnees['e_date_depart']."' required>
                         </div>
                         <div id='checkdp' class='verif'></div>
                     </div>
                 <div class='field'>
                     <label for='date_arrivee_excursion' class='label'>End :</label>
                     <div class='control'>
-                        <input class='input' type='date' name='date_arrivee_excursion' id='date_arrivee_excursion' value='".$donnees['e_date_arrivee']."'>
+                        <input class='input' type='date' name='date_arrivee_excursion' id='date_arrivee_excursion' value='".$donnees['e_date_arrivee']."' required>
                         </div>
                         <div id='checkda' class='verif'></div>
                     </div>

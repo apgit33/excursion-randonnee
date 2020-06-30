@@ -25,28 +25,28 @@ if (!isset($_SESSION["admin"]) || $_SESSION["admin"]===false){
                 <div class='field'>
                     <label for='nom_randonneur' class='label'>First Name :</label>
                     <div class='control'>
-                        <input type='text' name='nom_randonneur' id='nom_randonneur' class='input'>         
+                        <input type='text' name='nom_randonneur' id='nom_randonneur' class='input' required>         
                     </div>
                     <div id='checkfirstname' class='verif'></div>
                 </div>    
                 <div class='field'>
                     <label for='prenom_randonneur' class='label'>Last Name :</label>
                     <div class='control'>
-                        <input type='text' name='prenom_randonneur' id='prenom_randonneur' class='input'>
+                        <input type='text' name='prenom_randonneur' id='prenom_randonneur' class='input' required>
                     </div>
                     <div id='checklastname' class='verif'></div>
                 </div>    
                 <div class='field'>
                     <label for='email_randonneur' class='label'>Email :</label>
                     <div class='control'>
-                        <input type='email' name='email_randonneur' id='email_randonneur' class='input'>
+                        <input type='email' name='email_randonneur' id='email_randonneur' class='input' required>
                     </div>
                     <div id='checkemail' class='verif'></div>
                 </div> 
                 <div class='field'>
                 <label for='password_randonneur' class='label'>Password :</label>
                     <div class='control'>
-                        <input type='password' name='password_randonneur' id='password_randonneur' class='input'>
+                        <input type='password' name='password_randonneur' id='password_randonneur' class='input' required>
                     </div>
                     <div id='checkpass' class='verif'></div>
                 </div> 
@@ -75,28 +75,28 @@ if (!isset($_SESSION["admin"]) || $_SESSION["admin"]===false){
                         <div class='field'>
                             <label for='nom_randonneur' class='label'>First Name :</label>
                             <div class='control'>
-                                <input class='input' type='text' name='nom_randonneur' id='nom_randonneur' value='".$donnees['r_nom']."'>         
+                                <input class='input' type='text' name='nom_randonneur' id='nom_randonneur' value='".$donnees['r_nom']."' required>         
                             </div>
                             <div id='checkfirstname' class='verif'></div>
                         </div>
                         <div class='field'>
                             <label for='prenom_randonneur' class='label'>Last Name :</label>
                             <div class='control'>
-                                <input class='input' type='text' name='prenom_randonneur' id='prenom_randonneur' value='".$donnees['r_prenom']."'>
+                                <input class='input' type='text' name='prenom_randonneur' id='prenom_randonneur' value='".$donnees['r_prenom']."' required>
                             </div>
                             <div id='checklastname' class='verif'></div>
                         </div>  
                         <div class='field'>
                             <label for='email_randonneur' class='label'>Email :</label>
                             <div class='control'>
-                                <input class='input' type='email' name='email_randonneur' id='email_randonneur' value='".$donnees['r_email']."'>
+                                <input class='input' type='email' name='email_randonneur' id='email_randonneur' value='".$donnees['r_email']."' required>
                             </div>
                             <div id='checkemail' class='verif'></div>
                         </div> 
                         <div class='field'>
                             <label for='password_randonneur' class='label'>Password :</label>
                             <div class='control'>
-                                <input class='input' type='password' name='password_randonneur' id='password_randonneur' value='".$donnees['r_password']."'>
+                                <input class='input' type='password' name='password_randonneur' id='password_randonneur' value='".$donnees['r_password']."' required>
                             </div>
                             <div id='checkpass' class='verif'></div>
                         </div> 

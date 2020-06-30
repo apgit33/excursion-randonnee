@@ -1,5 +1,5 @@
 const form = document.getElementById("form-login");
-const verif = document.getElementById("verif");
+const verif = document.getElementById("checklogin");
 
 form.addEventListener("submit",
 e => {
