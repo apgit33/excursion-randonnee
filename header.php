@@ -13,19 +13,24 @@
         <main> 
             <div class='container'>
             <?php if(isset($_SESSION['login']) && $_SESSION['login']===true){?>
-       
-                <div class='d-flex d-centered jc-between'>
-                    <div class='d-flex d-centered'>
-                        <figure class="image is-64x64">
-                            <img src="./img/nc64x64.png">
-                        </figure>
-                        <h1>Natural Coach</h1>
+                <div class="columns is-vcentered">
+                    <div class='column is-4'>
+                        <div class='d-flex d-centered jc-between'>
+                            <div class='d-flex d-centered'>
+                                <figure class="image is-64x64">
+                                    <img src="./img/nc64x64.png">
+                                </figure>
+                                <h1>Natural Coach</h1>
+                            </div>
+                        </div>
                     </div>
-                    <div>Welcome <a href='index.php'><?=$_SESSION['user_lastname']." ".$_SESSION['user_firstname'];?></a></div>
-            </div>
+                    <div class='column is-4 is-offset-4 has-text-right'>
+                            <div>Welcome <a href='index.php'><?=$_SESSION['user_firstname'];?></a></div>
+                    </div>
+                </div>
             <div class='columns'>
-                <div class='column is-2 '>
-                 <aside class='menu'>
+                <div class='column is-2 is-hidden-mobile'>
+                 <aside class='menu '>
                     <p class='menu-label'>
                         Home
                     </p>

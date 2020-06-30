@@ -27,17 +27,20 @@ if($action =='add') {
     while ($donnees2 = $reponse->fetch()){
         $user = $donnees2['r_nom']." ".$donnees2['r_prenom'];
     }
-    $title = "<h2 class='title is-2'>Ajout d'une réservations pour $user</h2>";
-    $content = " 
+    $title = "<h2 class='title is-2 has-text-centered'>Ajout d'une réservations pour $user</h2>";
+    $content = "   
+    <div class='column'>$title
+    <div class='table-container'>
     <table class='table is-mobile is-striped'>
                         <thead>
                             <tr>
-                                <th><a href='?action=list&ord=name'>Nom</a></th>
+                                <th>Pos</th>      
+                                <th>Nom</th>
                                 <th>Point de départ</th>
                                 <th>Point d'arrivée</th>
-                                <th><a href='?action=list&ord=tarif'>Tarif</a></th>
-                                <th><a href='?action=list&ord=dd'>Date de départ</th>
-                                <th><a href='?action=list&ord=da'>Date d'arrivée</th>
+                                <th>Tarif</th>
+                                <th>Date de départ</th>
+                                <th>Date d'arrivée</th>
                                 <th>Action</th>      
                                 <th>
                                     <form>
@@ -55,6 +58,7 @@ if($action =='add') {
                 while ($donnees = $reponse->fetch()) {
                     $content .= "
                       <tr>
+                            <th class='is-vcentered'>$pos</th>
                             <th class='is-vcentered'>".$donnees['e_nom']." </th>
                             <th class='is-vcentered'>".$donnees['e_point_depart']." </th>
                             <th class='is-vcentered'>".$donnees['e_point_arrivee']." </th>
@@ -71,19 +75,23 @@ if($action =='add') {
                             </form>
                             </th>
                         </tr>
-                    ";
+                    ";$pos++;
                 }
                 $content .= "</table>
+                </div>
+
     ";
 
 }else {
-    $title = "<h2 class='title is-2'>Gestion des réservations pour les randonneurs</h2>";
-            $content = " 
-            <form action='' method='GET'>
+    $title = "<h2 class='title is-2 has-text-centered'>Gestion des réservations pour les randonneurs</h2>";
+    $content = "   
+    <div class='column'>$title
+    <div class='column is-offset-one-quarter'>
+            <div class='column is-half '>
                 <div class='field'>
                     <label for='id' class='label'>Nom :</label>
-                </div>
-
+                </div>        
+            <form action='' method='GET'>
                 <div class='field is-grouped'>
                     <div class='control'>
                         <div class='select'>
@@ -105,12 +113,16 @@ if($action =='add') {
                     </div>
                 </div>
             </form>
-  ";
+</div>
+            ";
             if($id) {
                 $content .= "
+    <div class='column is-half'>
+
                             <table class='table is-mobile is-striped'>
                             <thead>
                                 <tr>
+                                    <th>Pos</th>
                                     <th><a href='?action=list&ord=name'>Nom</a></th>
                                     <th>Action</th>
                                     <th>
@@ -134,6 +146,7 @@ if($action =='add') {
                 while ($donnees = $reponse->fetch()) {
                     $content .= "
                     <tr>
+                        <th class='is-vcentered'>$pos</th>
                         <th class='is-vcentered'>".$donnees['e_nom']." </th>
                         <th>
                             <form action='' method='post'>
@@ -145,18 +158,22 @@ if($action =='add') {
                             </form>
                         </th>
                     </tr>
-                    ";
+                    ";$pos++;
                 }
-                $content .= "</table>";
+                $content .= "</table>
+                </div>
+                </div>
+                ";
             }
 
 
         }
         }
 echo "
-    <div class='column'>
-        $title
         $content
-    </div>";
- 
-include 'footer.php';
+    </div>   
+    </div>       
+</div>       
+</main>
+</body>
+</html>";

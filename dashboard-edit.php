@@ -5,41 +5,48 @@ $reponse = executeSQL($query,array($_SESSION['id']));
 
 if ($donnees = $reponse->fetch()) { ?>
     <div class='column'>
-    <h2 class='title is-2'>Edition de <?=$donnees['r_nom']." ".$donnees['r_prenom']?></h2>
-        <form action='' method='post' id='edit_profile'>
+    <h2 class='title is-2 has-text-centered'>Edition de <?=$donnees['r_nom']." ".$donnees['r_prenom']?></h2>
+        <div class='column is-offset-one-quarter'>
+                <div class='column is-half '>
+                    <form action='' method='post' id='edit_form'>
             <div class='field'>
                 <label for='nom_randonneur' class='label'>Nom :</label>
                 <div class='control'>
-                    <input class='input' type='text' name='nom_randonneur' id='nom_randonneur' value='<?=$donnees['r_nom']?>' onblur='verifPseudo(this)'>         
+                    <input class='input' type='text' name='nom_randonneur' id='nom_randonneur' value='<?=$donnees['r_nom']?>'>         
                 </div>
+                <div id='checkfirstname' class='verif'></div>
             </div>
             <div class='field'>
                 <label for='prenom_randonneur' class='label'>Prenom :</label>
                 <div class='control'>
                     <input class='input' type='text' name='prenom_randonneur' id='prenom_randonneur' value='<?=$donnees['r_prenom']?>'>
                 </div>
+                <div id='checklastname' class='verif'></div>
             </div>
             <div class='field'>
                 <label for='email_randonneur' class='label'>Email :</label>
                 <div class='control'>
                     <input class='input' type='email' name='email_randonneur' id='email_randonneur' value='<?=$donnees['r_email']?>'>
                 </div>
+                <div id='checkemail' class='verif'></div>
             </div>
             <div class='field'>
                 <label for='password_randonneur' class='label'>Password :</label>
                 <div class='control'>
                     <input class='input' type='password' name='password_randonneur' id='password_randonneur' value='<?=$donnees['r_password']?>'>
                 </div>
+                <div id='checkpass' class='verif'></div>
             </div>
             <div class='field is-grouped'>
                 <div class='control'>
-                    <button type ='submit' class='button is-success' name='modify'>Modifier</button>
+                    <button type ='submit' class='button is-success' name='modify'>Edit</button>
                 </div>
                 <div class='control'>
-                    <a href='index.php' class='button is-danger'>Annuler</a>
+                    <a href='index.php' class='button is-danger'>Cancel</a>
                 </div>
             </div>
         </form>
-        <ul id='verif'></ul>
+    </div>
+    </div>
     </div>
     <?php }?>

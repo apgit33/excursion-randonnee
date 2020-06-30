@@ -34,7 +34,7 @@ if(isset($_POST['book'])){
             $query = "INSERT INTO nc_booking VALUE (?,?)";
             executeSQL($query,array($_POST['book'],$id));     
         }else{
-            $erreurs = "Désolé, il n'y a plus de places disponibles pour cette excursion";
+            $erreurs = "<p>Sorry, there are no more places available for this excursion</p>";
         }
     } else if ($_GET['type']=='g') {
         $query = "INSERT INTO nc_guidemeneexcursion VALUE (?,?)";
@@ -49,9 +49,10 @@ if($action =='add' && isset($_GET['id']) && isset($_GET['type'])) {
         $e_nom = $donnees2['e_nom'];
     }
     if($_GET['type']=='r') {
-    $title = "<h2 class='title is-2'>Ajout d'un randonneur pour l'excursion :  $e_nom</h2>";
-
-            $content = " 
+    $title = "<h2 class='title is-2 has-text-centered'>Ajout d'un randonneur pour l'excursion :  $e_nom</h2>";
+    $content = "   
+    <div class='column'>$title
+    <div class='table-container'>
         <table class='table is-mobile is-striped'>
             <thead>
             <tr>
@@ -91,11 +92,13 @@ if($action =='add' && isset($_GET['id']) && isset($_GET['type'])) {
                         ";
                     }
                     $content .= "</table>
+                </div>
                 ";
     }elseif ($_GET['type']=='g'){
     $title = "<h2 class='title is-2'>Ajout d'un guide pour l'excursion :  $e_nom</h2>";
-
-        $content = " 
+    $content = "   
+    <div class='column'>$title
+    <div class='table-container'>
         <table class='table is-mobile is-striped'>
             <thead>
             <tr>
@@ -135,17 +138,22 @@ if($action =='add' && isset($_GET['id']) && isset($_GET['type'])) {
                         ";
                     }
                     $content .= "</table>
+                </div>
                 ";
 
     }
 
 }else {
-    $title = "<h2 class='title is-2'>Gestion des réservations pour les excursions</h2>";
-            $content = " 
-            <form action='' method='GET'>
+    $title = "<h2 class='title is-2 has-text-centered'>Gestion des réservations pour les excursions</h2>";
+    $content = "   
+    <div class='column'>$title
+    <div class='column'>
+            <div class='column is-half  is-offset-one-quarter'>
                 <div class='field'>
                     <label for='id' class='label'>Nom :</label>
-                </div>
+                </div>        
+            <form action='' method='GET'>
+
 
                 <div class='field is-grouped'>
                     <div class='control'>
@@ -167,8 +175,9 @@ if($action =='add' && isset($_GET['id']) && isset($_GET['type'])) {
                         <button type ='submit' class='button is-success' value ='$id'>Show</button>
                     </div>
                 </div>
-            </form>
-  ";
+                </form>
+                </div>
+                ";
             if($id) {
                 $max=0;
                 $query = "SELECT (SELECT `e_randonneurs_max` FROM `nc_excursion` WHERE `e_id`= ?) - count(r_id) as nombre_restant FROM `nc_randonneur` INNER JOIN nc_booking ON r_id = b_r_id WHERE b_e_id = ? ";
@@ -177,11 +186,10 @@ if($action =='add' && isset($_GET['id']) && isset($_GET['type'])) {
                     $max = $donnees['nombre_restant'];
                 }
                 $content .= "
-                <div class='table-container'>    
-                        <table class='table is-mobile is-striped'>
-                            <div class='field'>
-                                <caption>Liste des randonneurs</caption>
-                            </div>
+    <div class='column'>
+                <div class='table-container'>
+                            <table class='table is-striped'>
+                            <caption><h3 class='title is-3'>Hikers list</h3></caption>
                             <thead>
                                 <tr>
                                     <th>Pos</th>
@@ -242,14 +250,17 @@ if($action =='add' && isset($_GET['id']) && isset($_GET['type'])) {
                     ";
                     $i++;
                 }
-                $content .= "</table></div>";
+                $content .= "</table>
+                </div>
+                </div>
+                ";
 
 
                 $content .= "
+                <div class='table-container'>
+
                             <table class='table is-mobile is-striped'>
-                            <div class='field'>
-                                <caption>Liste des guides</caption>
-                            </div>
+                                <caption><h3 class='title is-3'>Guides list</h3></caption>
                             <thead>
                                 <tr>
                                     <th>Pos</th>
@@ -303,14 +314,15 @@ if($action =='add' && isset($_GET['id']) && isset($_GET['type'])) {
                     ";
                     $i++;
                 }
-                $content .= "</table>";
+                $content .= "</table>
+                </div>
+                </div>
+                </div>
+                ";
             }
         }
     }
             echo "
-            <div class='column'>
-            <div class='verif'>$erreurs</div>
-                $title
                 $content
                 </div>   
                         </div>       

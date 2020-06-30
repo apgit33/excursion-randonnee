@@ -10,6 +10,7 @@ include 'header.php';
 if(isset($_SESSION['admin']) && $_SESSION['admin']===true){
     $query ="SELECT e_nom FROM nc_excursion WHERE e_randonneurs_max - (SELECT count(*) FROM nc_booking WHERE b_e_id = e_id)>0";
 ?>
+    <div class="column">
         <div class="card card-admin">
             <header class="card-header">
                 <p class="card-header-title">Excursions</p>
@@ -23,6 +24,8 @@ if(isset($_SESSION['admin']) && $_SESSION['admin']===true){
                 </div>
             </div>
         </div>
+        </div>
+    <div class="column">
         <div class="card card-admin">
             <header class="card-header">
                 <p class="card-header-title">Randonneurs</p>
@@ -36,6 +39,8 @@ if(isset($_SESSION['admin']) && $_SESSION['admin']===true){
                 </div>
             </div>
         </div>
+        </div>
+    <div class="column">
         <div class="card card-admin">
             <header class="card-header">
                 <p class="card-header-title">Guides</p>
@@ -46,11 +51,11 @@ if(isset($_SESSION['admin']) && $_SESSION['admin']===true){
                 </div>   
             </div>
         </div>
+        </div>
     </div>
 <?php }elseif (isset($_GET['action'])=='edit') {
         include 'dashboard-edit.php';
         }else {?>
-    
     <div class='column'>
         <div class='card card_user'>
             <div class='card-image'>
@@ -84,7 +89,6 @@ if(isset($_SESSION['admin']) && $_SESSION['admin']===true){
     }?>
     </div>       
     </main>
-    <script src='https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js'></script>
-    <script src='./src/edit-profile.js'></script>
+    <script src='./src/randonneur.js'></script>
 </body>
 </html>

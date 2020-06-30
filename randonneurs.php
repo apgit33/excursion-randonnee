@@ -17,75 +17,89 @@ if (!isset($_SESSION["admin"]) || $_SESSION["admin"]===false){
     }
 
     if($action =='add') {
-        $title = "<h2 class='title is-2'>Ajout d'un randonneur</h2>";
-        $content = "
+        $title = "<h2 class='title is-2 has-text-centered'>Ajout d'un randonneur</h2>";
+        $content = "   
+        <div class='column is-offset-one-quarter'>
+        <div class='column is-half '>$title
             <form action='' method='post' id='add_form'>
                 <div class='field'>
                     <label for='nom_randonneur' class='label'>Nom :</label>
                     <div class='control'>
                         <input type='text' name='nom_randonneur' id='nom_randonneur' class='input'>         
                     </div>
+                    <div id='checkfirstname' class='verif'></div>
                 </div>    
                 <div class='field'>
                     <label for='prenom_randonneur' class='label'>Prenom :</label>
                     <div class='control'>
                         <input type='text' name='prenom_randonneur' id='prenom_randonneur' class='input'>
                     </div>
+                    <div id='checklastname' class='verif'></div>
                 </div>    
                 <div class='field'>
                     <label for='email_randonneur' class='label'>Email :</label>
                     <div class='control'>
                         <input type='email' name='email_randonneur' id='email_randonneur' class='input'>
                     </div>
+                    <div id='checkemail' class='verif'></div>
                 </div> 
                 <div class='field'>
                 <label for='password_randonneur' class='label'>Password :</label>
                     <div class='control'>
                         <input type='password' name='password_randonneur' id='password_randonneur' class='input'>
                     </div>
+                    <div id='checkpass' class='verif'></div>
                 </div> 
                 <div class='field is-grouped'>
                     <div class='control'>
                         <button type ='submit' class='button is-success' name='add_entry'>Ajouter</button>
                     </div>
                     <div class='control'>
-                        <button type ='reset' class='button is-danger'>Reset</button>
+                        <a href='excursion.php' class='button is-danger'>Cancel</a>
                     </div>
                 </div>
                 </form>
-                <ul id='verif'></ul>";
+                </div>
+                </div>
+                ";
     } elseif(isset($_POST['edit'])) {
             $query = "SELECT r_id, r_nom, r_prenom, r_email, r_password FROM `nc_randonneur` WHERE r_id = ?";
             $reponse = executeSQL($query,array($_POST['edit']));
             
             if ($donnees = $reponse->fetch()) {
-                $title = "<h2 class='title is-2'>Edition de ".$donnees['r_nom']." ".$donnees['r_prenom']."</h2>";
-                $content = "
+                $title = "<h2 class='title is-2 has-text-centered'>Edition de ".$donnees['r_nom']." ".$donnees['r_prenom']."</h2>";
+                $content = "   
+                <div class='column is-offset-one-quarter'>
+                <div class='column is-half '>$title
                     <form action='' method='post' id='edit_form'>
                         <div class='field'>
                             <label for='nom_randonneur' class='label'>Nom :</label>
                             <div class='control'>
                                 <input class='input' type='text' name='nom_randonneur' id='nom_randonneur' value='".$donnees['r_nom']."'>         
                             </div>
+                            <div id='checkfirstname' class='verif'></div>
                         </div>
                         <div class='field'>
                             <label for='prenom_randonneur' class='label'>Prenom :</label>
                             <div class='control'>
                                 <input class='input' type='text' name='prenom_randonneur' id='prenom_randonneur' value='".$donnees['r_prenom']."'>
                             </div>
-                        </div>
+                            <div id='checklastname' class='verif'></div>
+                        </div>  
                         <div class='field'>
                             <label for='email_randonneur' class='label'>Email :</label>
                             <div class='control'>
                                 <input class='input' type='email' name='email_randonneur' id='email_randonneur' value='".$donnees['r_email']."'>
                             </div>
-                        </div>
+                            <div id='checkemail' class='verif'></div>
+                        </div> 
                         <div class='field'>
                             <label for='password_randonneur' class='label'>Password :</label>
                             <div class='control'>
                                 <input class='input' type='password' name='password_randonneur' id='password_randonneur' value='".$donnees['r_password']."'>
                             </div>
-                        </div>
+                            <div id='checkpass' class='verif'></div>
+                        </div> 
                         <div class='field is-grouped'>
                             <div class='control'>
                             <input type ='hidden' name='id' value='".$donnees['r_id']."'>
@@ -98,14 +112,17 @@ if (!isset($_SESSION["admin"]) || $_SESSION["admin"]===false){
                             </div>
                         </div>
                     </form>
-                    <ul id='verif'></ul>";
+                    </div></div>";
             }
         } else {
-            $title = "<h2 class='title is-2'>Affichage des randonneurs</h2>";
+            $title = "<h2 class='title is-2 has-text-centered'>Affichage des randonneurs</h2>";
             $content = " 
+            <div class='column'>$title
+            <div class='table-container'>
                 <table class='table is-mobile is-striped'>
                     <thead>
                         <tr>
+                            <th>Pos</th>
                             <th>Nom</th>
                             <th>Prenom</th>
                             <th>Email</th>
@@ -119,10 +136,10 @@ if (!isset($_SESSION["admin"]) || $_SESSION["admin"]===false){
                     $query = "SELECT r_id, r_nom, r_prenom, r_email, r_password FROM `nc_randonneur` ORDER BY `r_nom`";
 
                     $reponse = executeSQL($query,array());
-                    
                     while ($donnees = $reponse->fetch()) {
                         $content .= "
                         <tr>
+                            <th class='is-vcentered'>$pos</th>
                             <th class='is-vcentered'>".$donnees['r_nom']." </th>
                             <th class='is-vcentered'>".$donnees['r_prenom']." </th>
                             <th class='is-vcentered'>".$donnees['r_email']." </th>
@@ -140,20 +157,17 @@ if (!isset($_SESSION["admin"]) || $_SESSION["admin"]===false){
                                 </form>
                             </th>
                         </tr>
-                        ";
+                        ";$pos++;
                     }
-            $content .= "</table>";
+            $content .= "</table></div></div>";
         }
 }
 echo "
-        <div class='column'>
-            $title
+
             $content
         </div>   
-                </div>       
             </div>       
             </main>
-        <script src='https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js'></script>
         <script src='./src/randonneur.js'></script>
     </body>
 </html>";

@@ -13,7 +13,4 @@ function date_outil($date,$nombre_jour) {
     // Supprime les jours
     $timestamp = $date_string - ($nombre_jour * 86400);
     return date("Y-m-d", $timestamp);
-  
- 
 }
-
