@@ -13,28 +13,25 @@ $da = (isset($_POST['date_arrivee_excursion']) ? trim($_POST['date_arrivee_excur
 
 
 if(!preg_match('^[A-Za-z]+((\s)?((\'|\-|\.)?([A-Za-z])+))*$^',$nom)) {
-    $erreurs[] = 'Nom incorrect';
+    $erreurs[]['nom'] = 'Nom incorrect';
 }elseif(strlen($nom) < 3 || strlen($nom) > 16) {
-    $erreurs[] =  "Nom entre 3 et 16 caractère";
+    $erreurs[]['nom'] =  "Nom entre 3 et 16 caractère";
 }
 
-if(!preg_match("/^\d+(?:\.\d+)?$/",$tarif)) {$erreurs[] = 'Tarif incorrect';}
-if(!preg_match("/^\d+(?:\.\d+)?$/",$max)) {$erreurs[] = 'Nombre de randonneurs maximum incorrect';}
+if(!preg_match("/^\d+(?:\.\d+)?$/",$tarif)) {$erreurs[]['tarif'] = 'Tarif incorrect';}
+if(!preg_match("/^\d+(?:\.\d+)?$/",$max)) {$erreurs[]['max'] = 'Nombre de randonneurs maximum incorrect';}
 
 if((!preg_match("/^[0-9]{4}-(0[1-9]|1[0-2])-(0[1-9]|[1-2][0-9]|3[0-1])$/",$dp)) || ($dp<date('Y-m-d')) ) {
-    $erreurs[] = 'Date de départ invalide';
+    $erreurs[]['dp'] = 'Date de départ invalide';
 }
 if((!preg_match("/^[0-9]{4}-(0[1-9]|1[0-2])-(0[1-9]|[1-2][0-9]|3[0-1])$/",$da)) || ($da<date('Y-m-d')) || ($da<$dp) ) {
-    $erreurs[] = "Date d'arrivée invalide";
+    $erreurs[]['da'] = "Date d'arrivée invalide";
 }
 if ($pd=='' || $pa=='') {
-    $erreurs[] = "Point de départ ou d'arrivée incorrect";
+    $erreurs[]['point'] = "Point de départ ou d'arrivée incorrect";
 }
 
-array_filter($erreurs);
-$array= (!empty($erreurs)) ? implode(',', $erreurs) : 0;
-
-if (empty($array)) {
+if (!isset($erreurs[1])) {
     $validation = true;
     $query = "UPDATE `nc_excursion` SET e_nom = ?, e_point_depart = ?, e_point_arrivee = ?,e_date_depart = ?,e_date_arrivee = ?,e_tarif = ?,e_randonneurs_max = ?  WHERE `e_id` = ?";
     executeSQL($query,array($nom,$pd,$pa,$dp,$da,$tarif,$max,$_POST['id']));
