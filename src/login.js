@@ -15,7 +15,7 @@ e => {
         if(datas.validation==true) {location.href='dashboard.php';}
         datas.erreurs.forEach((data) => {
             //On créé un créé un élément HTML option
-            let champ = document.createElement("li");
+            let champ = document.createElement("p");
             //On affecte la valeur de l'élément créé
             champ.innerHTML = data;
             //On ajoute en noeud enfant à la datalist l'option créé

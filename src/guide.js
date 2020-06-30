@@ -1,13 +1,13 @@
 const addForm = document.getElementById("add_form");
 const editForm = document.getElementById("edit_form");
-const verif = document.getElementById("verif");
 
 if(addForm) {
     addForm.addEventListener("submit",
     e => {
         e.preventDefault();
         const formData = new FormData(addForm);
-        verif.innerHTML = "";
+        document.getElementById("checkfirstname").innerHTML = "";
+        document.getElementById("checkphone").innerHTML = "";
         fetch('./treatment/add-guide.php', {
             body: formData,
             method: "post"
@@ -16,12 +16,16 @@ if(addForm) {
         .then(datas => {
             if(datas.validation==true) {location.href='guide.php';}
             datas.erreurs.forEach((data) => {
-                //On créé un créé un élément HTML option
-                let champ = document.createElement("li");
-                //On affecte la valeur de l'élément créé
-                champ.innerHTML = data;
-                //On ajoute en noeud enfant à la datalist l'option créé
-                verif.appendChild(champ);
+                if(data.nom) {
+                    let champ = document.createElement("p");
+                    champ.innerHTML = data.nom;
+                    document.getElementById("checkfirstname").appendChild(champ);
+                }
+                if(data.phone) {
+                    let champ = document.createElement("p");
+                    champ.innerHTML = data.phone;
+                    document.getElementById("checkphone").appendChild(champ);
+                }
                 });
                 
         });
@@ -32,7 +36,8 @@ if(editForm) {
     e => {
         e.preventDefault();
         const formData = new FormData(editForm);
-        verif.innerHTML = "";
+        document.getElementById("checkfirstname").innerHTML = "";
+        document.getElementById("checkphone").innerHTML = "";
         fetch('./treatment/edit-guide.php', {
             body: formData,
             method: "post"
@@ -41,12 +46,16 @@ if(editForm) {
         .then(datas => {
             if(datas.validation==true) {location.href='guide.php';}
             datas.erreurs.forEach((data) => {
-                //On créé un créé un élément HTML option
-                let champ = document.createElement("li");
-                //On affecte la valeur de l'élément créé
-                champ.innerHTML = data;
-                //On ajoute en noeud enfant à la datalist l'option créé
-                verif.appendChild(champ);
+                if(data.nom) {
+                    let champ = document.createElement("p");
+                    champ.innerHTML = data.nom;
+                    document.getElementById("checkfirstname").appendChild(champ);
+                }
+                if(data.phone) {
+                    let champ = document.createElement("p");
+                    champ.innerHTML = data.phone;
+                    document.getElementById("checkphone").appendChild(champ);
+                }
                 });
                 
         });
