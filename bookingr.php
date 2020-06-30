@@ -27,7 +27,7 @@ if($action =='add') {
     while ($donnees2 = $reponse->fetch()){
         $user = $donnees2['r_nom']." ".$donnees2['r_prenom'];
     }
-    $title = "<h2 class='title is-2 has-text-centered'>Ajout d'une réservations pour $user</h2>";
+    $title = "<h2 class='title is-2 has-text-centered'>Booking excursion for $user</h2>";
     $content = "   
     <div class='column'>$title
     <div class='table-container'>
@@ -35,17 +35,17 @@ if($action =='add') {
                         <thead>
                             <tr>
                                 <th>Pos</th>      
-                                <th>Nom</th>
-                                <th>Point de départ</th>
-                                <th>Point d'arrivée</th>
-                                <th>Tarif</th>
-                                <th>Date de départ</th>
-                                <th>Date d'arrivée</th>
+                                <th>Name</th>
+                                <th>Starting point</th>
+                                <th>End point</th>
+                                <th>Price</th>
+                                <th>Start</th>
+                                <th>End</th>
                                 <th>Action</th>      
                                 <th>
                                     <form>
                                         <div class='control'>
-                                            <button type ='submit' class='button is-danger'>Annuler</button>
+                                            <button type ='submit' class='button is-danger' name='cancel'>Annuler</button>
                                         </div>
                                     </form>
                                 </th>
@@ -62,14 +62,14 @@ if($action =='add') {
                             <th class='is-vcentered'>".$donnees['e_nom']." </th>
                             <th class='is-vcentered'>".$donnees['e_point_depart']." </th>
                             <th class='is-vcentered'>".$donnees['e_point_arrivee']." </th>
-                            <th class='is-vcentered'>".$donnees['e_tarif']." </th>
+                            <th class='is-vcentered'>".$donnees['e_tarif']." €</th>
                             <th class='is-vcentered'>".$donnees['e_date_depart']." </th>
                             <th class='is-vcentered'>".$donnees['e_date_arrivee']." </th>
                             <th class='is-vcentered'>
                             <form action='' method='post'>
                                 <div class='field'>
                                     <div class='control'>
-                                        <button type ='submit' class='button is-success' onclick=\"return confirm('Vous allez reserver l\'excursion ".$donnees['e_nom']."');\" name='book' value='".$donnees['e_id']."'>Reserver</button>
+                                        <button type ='submit' class='button is-success' onclick=\"return confirm('Vous allez reserver l\'excursion ".$donnees['e_nom']."');\" name='book' value='".$donnees['e_id']."'>Book</button>
                                     </div>
                                 </div>
                             </form>
@@ -83,13 +83,13 @@ if($action =='add') {
     ";
 
 }else {
-    $title = "<h2 class='title is-2 has-text-centered'>Gestion des réservations pour les randonneurs</h2>";
+    $title = "<h2 class='title is-2 has-text-centered'>Reservations management for hikers</h2>";
     $content = "   
     <div class='column'>$title
     <div class='column is-offset-one-quarter'>
             <div class='column is-half '>
                 <div class='field'>
-                    <label for='id' class='label'>Nom :</label>
+                    <label for='id' class='label'>Name :</label>
                 </div>        
             <form action='' method='GET'>
                 <div class='field is-grouped'>
@@ -109,7 +109,7 @@ if($action =='add') {
                         </div>
                     </div>
                     <div class='control'>
-                        <button type ='submit' class='button is-success' value =$id>Show</button>
+                        <button type ='submit' class='button is-success' value ='$id' name='show'>Show</button>
                     </div>
                 </div>
             </form>
@@ -123,7 +123,7 @@ if($action =='add') {
                             <thead>
                                 <tr>
                                     <th>Pos</th>
-                                    <th><a href='?action=list&ord=name'>Nom</a></th>
+                                    <th><a href='?action=list&ord=name'>Name</a></th>
                                     <th>Action</th>
                                     <th>
                                         <div class='field'>

@@ -30,14 +30,14 @@ if (!isset($_SESSION["admin"]) || $_SESSION["admin"]===false){
         <div class='column is-half '>$title
         <form action='' method='post' id='add_form'>
             <div class='field'>
-                <label for='nom_excursion' class='label'>Nom :</label>
+                <label for='nom_excursion' class='label'>Name :</label>
                 <div class='control'>
                     <input type='text' name='nom_excursion' id='nom_excursion' class='input'>         
                 </div>
                 <div id='checkfirstname' class='verif'></div>
             </div>
             <div class='field'>
-                <label for='point_depart_excursion' class='label'>Point de départ :</label>
+                <label for='point_depart_excursion' class='label'>Starting point :</label>
                 <div class='control'>
                     <div class='select'>
                         <select name='point_depart_excursion' id='point_depart_excursion'>$region</select>
@@ -45,7 +45,7 @@ if (!isset($_SESSION["admin"]) || $_SESSION["admin"]===false){
                 </div>
             </div>
             <div class='field'>
-                <label for='point_arrive_excursion' class='label'>Point d'arrivé :</label>
+                <label for='point_arrive_excursion' class='label'>End point :</label>
                 <div class='control'>
                     <div class='select'>
                         <select name='point_arrive_excursion' id='point_arrive_excursion'>$region</select>
@@ -53,28 +53,28 @@ if (!isset($_SESSION["admin"]) || $_SESSION["admin"]===false){
                 </div>
             </div>
             <div class='field'>
-                <label for='tarif_excursion' class='label'>Tarif :</label>
+                <label for='tarif_excursion' class='label'>Price €:</label>
                 <div class='control'>
                     <input class='input' type='number' name='tarif_excursion' id='tarif_excursion'>
                 </div>
                 <div id='checktarif' class='verif'></div>
             </div>
             <div class='field'>
-                <label for='randonneurs_max_excursion' class='label'>Nombre maximum de randonneurs :</label>
+                <label for='randonneurs_max_excursion' class='label'>Hikers max :</label>
                 <div class='control'>
                     <input class='input' type='number' name='randonneurs_max_excursion' id='randonneurs_max_excursion'>     
                 </div>
                 <div id='checkmax' class='verif'></div>
             </div>
             <div class='field'>
-                <label for='date_depart_excursion' class='label'>Date de départ :</label>
+                <label for='date_depart_excursion' class='label'>Start :</label>
                 <div class='control'>
                     <input class='input' type='date' name='date_depart_excursion' id='date_depart_excursion'>  
                 </div>
                 <div id='checkdp' class='verif'></div>
             </div>
             <div class='field'>
-                <label for='date_arrivee_excursion' class='label'>Date d'arrivée :</label>
+                <label for='date_arrivee_excursion' class='label'>End :</label>
                 <div class='control'>
                     <input class='input' type='date' name='date_arrivee_excursion' id='date_arrivee_excursion'>  
                 </div>
@@ -99,10 +99,10 @@ if (!isset($_SESSION["admin"]) || $_SESSION["admin"]===false){
             </div>
             <div class='field is-grouped'>
                 <div class='control'>
-                    <button type ='submit' class='button is-success' name='add_entry'>Ajouter</button>
+                    <button type ='submit' class='button is-success' name='add_entry'>Create</button>
                 </div>
                 <div class='control'>
-                    <a href='excursion.php' class='button is-danger'>Cancel</a>
+                    <a href='excursion.php' class='button is-danger' name='cancel'>Cancel</a>
                 </div>
             </div>
             </form>
@@ -112,20 +112,20 @@ if (!isset($_SESSION["admin"]) || $_SESSION["admin"]===false){
         $query = "SELECT e_nom, e_point_depart, e_point_arrivee, e_tarif, e_randonneurs_max, e_date_depart, e_date_arrivee FROM `nc_excursion` WHERE e_id = ?";
         $reponse = executeSQL($query,array($_POST['edit']));
         if ($donnees = $reponse->fetch()) {
-            $title = "<h2 class='title is-2'>Edition de l'excursion n ° ".$_POST['edit']."</h2>";
+            $title = "<h2 class='title is-2'>Edit of excursion n ° ".$_POST['edit']."</h2>";
             $content = "   
             <div class='column is-offset-one-quarter'>
             <div class='column is-half '>$title
             <form action='' method='post' id='edit_form'>
                 <div class='field'>
-                    <label for='nom_excursion' class='label'>Nom :</label>
+                    <label for='nom_excursion' class='label'>Name :</label>
                     <div class='control'>
                         <input class='input' type='text' name='nom_excursion' id='nom_excursion' value='".$donnees['e_nom']."'>         
                     </div>
                     <div id='checkfirstname' class='verif'></div>
                 </div>
                 <div class='field'>
-                    <label for='point_depart_excursion' class='label'>Point de départ :</label>
+                    <label for='point_depart_excursion' class='label'>Starting point :</label>
                     <div class='control'>
                         <div class='select'>
                             <select name='point_depart_excursion' id='point_depart_excursion'>    
@@ -143,7 +143,7 @@ if (!isset($_SESSION["admin"]) || $_SESSION["admin"]===false){
                     </div>
                 </div>
                 <div class='field'>
-                    <label for='point_arrive_excursion' class='label'>Point d'arrivée :</label>
+                    <label for='point_arrive_excursion' class='label'>End point :</label>
                     <div class='control'>
                         <div class='select'>
                             <select name='point_arrive_excursion' id='point_arrive_excursion'>";
@@ -160,28 +160,28 @@ if (!isset($_SESSION["admin"]) || $_SESSION["admin"]===false){
                     </div>
                 </div>
                 <div class='field'>
-                    <label for='tarif_excursion' class='label'>Tarif :</label>
+                    <label for='tarif_excursion' class='label'>Price € :</label>
                     <div class='control'>
                         <input class='input' type='number' name='tarif_excursion' id='tarif_excursion' value='".$donnees['e_tarif']."'>
                     </div>
                     <div id='checktarif' class='verif'></div>
                 </div>
                 <div class='field'>
-                    <label for='randonneurs_max_excursion' class='label'>Nombre maximum de randonneurs :</label>
+                    <label for='randonneurs_max_excursion' class='label'>Hikers max :</label>
                     <div class='control'>
                         <input class='input' type='number' name='randonneurs_max_excursion' id='randonneurs_max_excursion' value='".$donnees['e_randonneurs_max']."'>     
                         </div>
                         <div id='checkmax' class='verif'></div>
                     </div>
                 <div class='field'>
-                    <label for='date_depart_excursion' class='label'>Date de départ :</label>
+                    <label for='date_depart_excursion' class='label'>Start :</label>
                     <div class='control'>
                         <input class='input' type='date' name='date_depart_excursion' id='date_depart_excursion' value='".$donnees['e_date_depart']."'>
                         </div>
                         <div id='checkdp' class='verif'></div>
                     </div>
                 <div class='field'>
-                    <label for='date_arrivee_excursion' class='label'>Date d'arrivée :</label>
+                    <label for='date_arrivee_excursion' class='label'>End :</label>
                     <div class='control'>
                         <input class='input' type='date' name='date_arrivee_excursion' id='date_arrivee_excursion' value='".$donnees['e_date_arrivee']."'>
                         </div>
@@ -190,14 +190,14 @@ if (!isset($_SESSION["admin"]) || $_SESSION["admin"]===false){
                 <input type='hidden' name='id' value='".$_POST['edit']."'>
                 <div class='field is-grouped'>
                     <div class='control'>
-                        <button type ='submit' class='button is-success'>Modifier</button>
+                        <button type ='submit' class='button is-success' name='edit'>Edit</button>
                     </div>
                     <div class='control'>
-                        <button type ='submit' class='button is-danger'>Annuler</button>
+                        <button type ='submit' class='button is-danger' name='cancel'>Cancel</button>
                     </div>
                 </div>
                 </form>
-                <div id='verif'></div></div></div>";
+                </div></div>";
         }
     } else {
         $title = "<h2 class='title is-2 has-text-centered'>Affichage des excursions</h2>";
@@ -251,7 +251,7 @@ if (!isset($_SESSION["admin"]) || $_SESSION["admin"]===false){
                             <th class='is-vcentered'>".$donnees['e_nom']." </th>
                             <th class='is-vcentered'>".$donnees['e_point_depart']." </th>
                             <th class='is-vcentered'>".$donnees['e_point_arrivee']." </th>
-                            <th class='is-vcentered'>".$donnees['e_tarif']." </th>
+                            <th class='is-vcentered'>".$donnees['e_tarif']." €</th>
                             <th class='is-vcentered'>".$donnees['e_randonneurs_max']." </th>
                             <th class='is-vcentered'>".$donnees['e_date_depart']." </th>
                             <th class='is-vcentered'>".$donnees['e_date_arrivee']." </th>

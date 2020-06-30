@@ -45,11 +45,11 @@
                     </p>
                     <ul class='menu-list'>
                         <li>
-                            Manage Randonneurs
+                            Manage Hikers
                             <ul>
-                                <li><a href='randonneurs.php?action=list'>Liste randonneurs</a></li>
-                                <li><a href='randonneurs.php?action=add'>New randonneur</a></li>
-                                <li><a href='bookingr.php?action=list'>Reservation randonneurs</a></li>
+                                <li><a href='randonneurs.php?action=list'>Hikers list</a></li>
+                                <li><a href='randonneurs.php?action=add'>New Hiker</a></li>
+                                <li><a href='bookingr.php?action=list'>Booking Hikers</a></li>
                             </ul>
                         </li>
                     </ul>
@@ -57,9 +57,9 @@
                         <li>
                             Manage Guides
                             <ul>
-                                <li><a href='guide.php?action=list'>Liste guides</a></li>
+                                <li><a href='guide.php?action=list'>Guide list</a></li>
                                 <li><a href='guide.php?action=add'>New guide</a></li>
-                                <li><a href='bookingg.php?action=list'>Reservation guides</a></li>
+                                <li><a href='bookingg.php?action=list'>Booking Guides</a></li>
                             </ul>
                         </li>
                     </ul>
@@ -67,9 +67,9 @@
                         <li>
                             Manage Excursion
                             <ul>
-                                <li><a href='excursion.php?action=list'>Liste excursions</a></li>
+                                <li><a href='excursion.php?action=list'>Excursions list</a></li>
                                 <li><a href='excursion.php?action=add'>New excursion</a></li>
-                                <li><a href='bookinge.php?action=list'>Reservation excursions</a></li>
+                                <li><a href='bookinge.php?action=list'>Booking excursions</a></li>
                             </ul>
                         </li>
                     </ul>

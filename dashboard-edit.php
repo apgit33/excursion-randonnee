@@ -5,19 +5,19 @@ $reponse = executeSQL($query,array($_SESSION['id']));
 
 if ($donnees = $reponse->fetch()) { ?>
     <div class='column'>
-    <h2 class='title is-2 has-text-centered'>Edition de <?=$donnees['r_nom']." ".$donnees['r_prenom']?></h2>
+    <h2 class='title is-2 has-text-centered'>Edition of <?=$donnees['r_nom']." ".$donnees['r_prenom']?></h2>
         <div class='column is-offset-one-quarter'>
                 <div class='column is-half '>
                     <form action='' method='post' id='edit_form'>
             <div class='field'>
-                <label for='nom_randonneur' class='label'>Nom :</label>
+                <label for='nom_randonneur' class='label'>First Name :</label>
                 <div class='control'>
                     <input class='input' type='text' name='nom_randonneur' id='nom_randonneur' value='<?=$donnees['r_nom']?>'>         
                 </div>
                 <div id='checkfirstname' class='verif'></div>
             </div>
             <div class='field'>
-                <label for='prenom_randonneur' class='label'>Prenom :</label>
+                <label for='prenom_randonneur' class='label'>Last Name :</label>
                 <div class='control'>
                     <input class='input' type='text' name='prenom_randonneur' id='prenom_randonneur' value='<?=$donnees['r_prenom']?>'>
                 </div>
@@ -39,7 +39,7 @@ if ($donnees = $reponse->fetch()) { ?>
             </div>
             <div class='field is-grouped'>
                 <div class='control'>
-                    <button type ='submit' class='button is-success' name='modify'>Edit</button>
+                    <button type ='submit' class='button is-success' name='edit'>Edit</button>
                 </div>
                 <div class='control'>
                     <a href='index.php' class='button is-danger'>Cancel</a>

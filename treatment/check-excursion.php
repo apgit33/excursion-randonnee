@@ -12,7 +12,7 @@ while($donnees = $reponse->fetch()) {
 }
 
 if($max<=0) {
-    $erreurs = 'Désolé, il ne reste plus de places disponibles pour cette excursion';
+    $erreurs = 'Sorry, there are no more places available for this excursion';
 }
 
 array_filter($erreurs);

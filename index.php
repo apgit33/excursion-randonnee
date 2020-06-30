@@ -8,6 +8,7 @@ if(isset($_GET['action'])=='logout') {
     session_unset();
     exit;
 }
+
 //Si l'utilisateur est déjà connecté, on l'envoie sur son profil
 if(isset($_SESSION['login']) && $_SESSION['login']===true){ 
     header('Location: dashboard.php');

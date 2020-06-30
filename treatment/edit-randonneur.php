@@ -10,23 +10,23 @@ $email = (isset($_POST['email_randonneur']) ? trim($_POST['email_randonneur']):"
 $pwd = (isset($_POST['password_randonneur']) ? $_POST['password_randonneur']:"");
 
 if(!preg_match('^[A-Za-z]+((\s)?((\'|\-|\.)?([A-Za-z])+))*$^',$nom)) {
-    $erreurs[]['nom'] = 'Nom incorrect';
+    $erreurs[]['nom'] = 'First name incorrect';
 }elseif(strlen($nom) < 3 || strlen($nom) > 16) {
-    $erreurs[]['nom'] =  "Nom entre 3 et 16 caractère";
+    $erreurs[]['nom'] =  "First name size between 3 & 16 required";
 }
 
 if(!preg_match("#^([a-zàáâäçèéêëìíîïñòóôöùúûü]+(( |')[a-zàáâäçèéêëìíîïñòóôöùúûü]+)*)+([-]([a-zàáâäçèéêëìíîïñòóôöùúûü]+(( |')[a-zàáâäçèéêëìíîïñòóôöùúûü]+)*)+)*$#iu",$prenom)) {
-    $erreurs[]['prenom'] = 'Prenom incorrect';
+    $erreurs[]['prenom'] = 'Last name incorrect';
 }elseif(strlen($prenom) < 3 || strlen($prenom) > 16) {
-    $erreurs[]['prenom'] =  "Prénom entre 3 et 16 caractère";
+    $erreurs[]['prenom'] =  "Last name size between 3 & 16 required";
 }
 
 if  (!filter_var(filter_var($email, FILTER_SANITIZE_EMAIL), FILTER_VALIDATE_EMAIL)) {  
-    $erreurs[]['email'] = "L'email n'est pas valide";
+    $erreurs[]['email'] = "Email invalid";
 } 
 
-if  (!preg_match("~[A-Z]~", $pwd)) {  $erreurs[]['password'] = "Le password doit avoir au moins une Majuscule";}
-if  (!preg_match("~[0-9]~", $pwd)) {  $erreurs[]['password'] = "Le password doit avoir au moins un chiffre";}
+if  (!preg_match("~[A-Z]~", $pwd)) {  $erreurs[]['password'] = "At least one capital";}
+if  (!preg_match("~[0-9]~", $pwd)) {  $erreurs[]['password'] = "At least one number";}
 
 $query = "SELECT r_id FROM `nc_randonneur` WHERE r_email = ?";
 $reponse = executeSQL($query,array($email));

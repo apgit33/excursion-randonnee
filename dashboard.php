@@ -17,10 +17,10 @@ if(isset($_SESSION['admin']) && $_SESSION['admin']===true){
             </header>
             <div class="card-content">
                 <div class="content">
-                    Total d'excursions : <?=executeSQL("SELECT count(`e_id`) FROM `nc_excursion`",array())->fetch()[0];?>
+                    Total excursions : <?=executeSQL("SELECT count(`e_id`) FROM `nc_excursion`",array())->fetch()[0];?>
                 </div>   
                 <div class="content">
-                    Excursions libre : <?=executeSQL("SELECT count(e_id) FROM nc_excursion WHERE e_randonneurs_max - (SELECT count(*) FROM nc_booking WHERE b_e_id = e_id)>0",array())->fetch()[0];?>
+                    Excursions not full : <?=executeSQL("SELECT count(e_id) FROM nc_excursion WHERE e_randonneurs_max - (SELECT count(*) FROM nc_booking WHERE b_e_id = e_id)>0",array())->fetch()[0];?>
                 </div>
             </div>
         </div>
@@ -28,14 +28,14 @@ if(isset($_SESSION['admin']) && $_SESSION['admin']===true){
     <div class="column">
         <div class="card card-admin">
             <header class="card-header">
-                <p class="card-header-title">Randonneurs</p>
+                <p class="card-header-title">Hikers</p>
             </header>
             <div class="card-content">
                 <div class="content">
-                    Total de randonneurs : <?=executeSQL("SELECT count(`r_id`) FROM `nc_randonneur`",array())->fetch()[0];?>
+                    Total Hikers : <?=executeSQL("SELECT count(`r_id`) FROM `nc_randonneur`",array())->fetch()[0];?>
                 </div>   
                 <div class="content">
-                    Randonneurs non inscrit : <?=executeSQL("SELECT count(`r_id`) FROM `nc_randonneur` LEFT JOIN nc_booking ON b_r_id = r_id WHERE b_r_id IS NULL ",array())->fetch()[0];?>
+                    Unregistered hikers/Excursion : <?=executeSQL("SELECT count(`r_id`) FROM `nc_randonneur` LEFT JOIN nc_booking ON b_r_id = r_id WHERE b_r_id IS NULL ",array())->fetch()[0];?>
                 </div>
             </div>
         </div>
@@ -47,7 +47,7 @@ if(isset($_SESSION['admin']) && $_SESSION['admin']===true){
             </header>
             <div class="card-content">
                 <div class="content">
-                    Total de guides : <?=executeSQL("SELECT count(`g_numero`) FROM `nc_guide`",array())->fetch()[0];?>
+                    Total guides : <?=executeSQL("SELECT count(`g_numero`) FROM `nc_guide`",array())->fetch()[0];?>
                 </div>   
             </div>
         </div>

@@ -17,20 +17,20 @@ if (!isset($_SESSION["admin"]) || $_SESSION["admin"]===false){
     }
 
     if($action =='add') {
-        $title = "<h2 class='title is-2 has-text-centered'>Ajout d'un randonneur</h2>";
+        $title = "<h2 class='title is-2 has-text-centered'>New Hiker</h2>";
         $content = "   
         <div class='column is-offset-one-quarter'>
         <div class='column is-half '>$title
             <form action='' method='post' id='add_form'>
                 <div class='field'>
-                    <label for='nom_randonneur' class='label'>Nom :</label>
+                    <label for='nom_randonneur' class='label'>First Name :</label>
                     <div class='control'>
                         <input type='text' name='nom_randonneur' id='nom_randonneur' class='input'>         
                     </div>
                     <div id='checkfirstname' class='verif'></div>
                 </div>    
                 <div class='field'>
-                    <label for='prenom_randonneur' class='label'>Prenom :</label>
+                    <label for='prenom_randonneur' class='label'>Last Name :</label>
                     <div class='control'>
                         <input type='text' name='prenom_randonneur' id='prenom_randonneur' class='input'>
                     </div>
@@ -52,7 +52,7 @@ if (!isset($_SESSION["admin"]) || $_SESSION["admin"]===false){
                 </div> 
                 <div class='field is-grouped'>
                     <div class='control'>
-                        <button type ='submit' class='button is-success' name='add_entry'>Ajouter</button>
+                        <button type ='submit' class='button is-success' name='add_entry'>Create</button>
                     </div>
                     <div class='control'>
                         <a href='excursion.php' class='button is-danger'>Cancel</a>
@@ -67,20 +67,20 @@ if (!isset($_SESSION["admin"]) || $_SESSION["admin"]===false){
             $reponse = executeSQL($query,array($_POST['edit']));
             
             if ($donnees = $reponse->fetch()) {
-                $title = "<h2 class='title is-2 has-text-centered'>Edition de ".$donnees['r_nom']." ".$donnees['r_prenom']."</h2>";
+                $title = "<h2 class='title is-2 has-text-centered'>Edition of ".$donnees['r_nom']." ".$donnees['r_prenom']."</h2>";
                 $content = "   
                 <div class='column is-offset-one-quarter'>
                 <div class='column is-half '>$title
                     <form action='' method='post' id='edit_form'>
                         <div class='field'>
-                            <label for='nom_randonneur' class='label'>Nom :</label>
+                            <label for='nom_randonneur' class='label'>First Name :</label>
                             <div class='control'>
                                 <input class='input' type='text' name='nom_randonneur' id='nom_randonneur' value='".$donnees['r_nom']."'>         
                             </div>
                             <div id='checkfirstname' class='verif'></div>
                         </div>
                         <div class='field'>
-                            <label for='prenom_randonneur' class='label'>Prenom :</label>
+                            <label for='prenom_randonneur' class='label'>Last Name :</label>
                             <div class='control'>
                                 <input class='input' type='text' name='prenom_randonneur' id='prenom_randonneur' value='".$donnees['r_prenom']."'>
                             </div>
@@ -105,17 +105,17 @@ if (!isset($_SESSION["admin"]) || $_SESSION["admin"]===false){
                             <input type ='hidden' name='id' value='".$donnees['r_id']."'>
                         </div>
                             <div class='control'>
-                                <button type ='submit' class='button is-success'>Modifier</button>
+                                <button type ='submit' class='button is-success' name='edit'>Edit</button>
                             </div>
                             <div class='control'>
-                                <button type ='submit' class='button is-danger'>Annuler</button>
+                                <button type ='submit' class='button is-danger' name='cancel'>Cancel</button>
                             </div>
                         </div>
                     </form>
                     </div></div>";
             }
         } else {
-            $title = "<h2 class='title is-2 has-text-centered'>Affichage des randonneurs</h2>";
+            $title = "<h2 class='title is-2 has-text-centered'>Display of Hikers</h2>";
             $content = " 
             <div class='column'>$title
             <div class='table-container'>
@@ -123,8 +123,8 @@ if (!isset($_SESSION["admin"]) || $_SESSION["admin"]===false){
                     <thead>
                         <tr>
                             <th>Pos</th>
-                            <th>Nom</th>
-                            <th>Prenom</th>
+                            <th>First Name</th>
+                            <th>Last Name</th>
                             <th>Email</th>
                             <th>Password</th>
                             <th>Action</th>

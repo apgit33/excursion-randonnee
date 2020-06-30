@@ -7,13 +7,13 @@ $nom = (isset($_POST['nom_guide']) ? trim($_POST['nom_guide']):"");
 $telephone = (isset($_POST['telephone']) ? trim($_POST['telephone']):"");
 
 if(!preg_match('^[A-Za-z]+((\s)?((\'|\-|\.)?([A-Za-z])+))*$^',$nom)) {
-    $erreurs[]['nom'] = 'Nom incorrect';
+    $erreurs[]['nom'] = 'Name incorrect';
 }elseif(strlen($nom) < 3 || strlen($nom) > 16) {
-    $erreurs[]['nom'] =  "Nom entre 3 et 16 caractère";
+    $erreurs[]['nom'] =  "Name size between 3 & 16 required";
 }
 
 if(!preg_match("#^0[6-7]([-. ]?[0-9]{2}){4}$#",$telephone)) {
-    $erreurs[]['phone'] = 'Téléphone incorrect';
+    $erreurs[]['phone'] = 'Phone incorrect';
 }
 
 $query = "SELECT g_telephone FROM `nc_guide` WHERE g_telephone = ?";

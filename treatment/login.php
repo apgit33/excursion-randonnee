@@ -26,10 +26,10 @@ if ($email !='' && $password != '') {
             $_SESSION['login'] = true;
             $_SESSION['id'] = $donnees['r_id'];
         }else{
-            $erreurs[] ='Mauvais login ou password';
+            $erreurs[] ='Wrong login or password';
         }
     }
 }else{
-    $erreurs[] = 'Login ou Password non renseigné';
+    $erreurs[] = 'Login or Password required';
 }
 echo json_encode(array('validation' => $validation,'erreurs' => $erreurs));

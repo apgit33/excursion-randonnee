@@ -25,24 +25,24 @@ if (!isset($_SESSION["login"]) || $_SESSION["login"]===false){
         executeSQL($query,array($_SESSION['id'],$_POST['book']));     
     }
     if($action =='add') {
-        $title = "<h2 class='title is-2 has-text-centered'>Ajout d'une réservation</h2>";
+        $title = "<h2 class='title is-2 has-text-centered'>Booking new excursion</h2>";
         $content = " 
         <div class='column'>$title
         <div class='table-container'>
         <table class='table is-mobile is-striped'>
                             <thead>
                                 <tr>
-                                    <th><a href='?action=list&ord=name'>Nom</a></th>
-                                    <th>Point de départ</th>
-                                    <th>Point d'arrivée</th>
-                                    <th><a href='?action=list&ord=tarif'>Tarif</a></th>
-                                    <th><a href='?action=list&ord=dd'>Date de départ</th>
-                                    <th><a href='?action=list&ord=da'>Date d'arrivée</th>
+                                    <th><a href='?action=list&ord=name'>Name</a></th>
+                                    <th>Starting point</th>
+                                    <th>End point</th>
+                                    <th><a href='?action=list&ord=tarif'>Price</a></th>
+                                    <th><a href='?action=list&ord=dd'>Start</th>
+                                    <th><a href='?action=list&ord=da'>End</th>
                                     <th>Action</th>      
                                     <th>
                                         <form>
                                             <div class='control'>
-                                                <button type ='submit' class='button is-danger'>Annuler</button>
+                                                <button type ='submit' class='button is-danger name='cancel'>Cancel</button>
                                             </div>
                                         </form>
                                     </th>
@@ -58,14 +58,14 @@ if (!isset($_SESSION["login"]) || $_SESSION["login"]===false){
                                 <th class='is-vcentered'>".$donnees['e_nom']." </th>
                                 <th class='is-vcentered'>".$donnees['e_point_depart']." </th>
                                 <th class='is-vcentered'>".$donnees['e_point_arrivee']." </th>
-                                <th class='is-vcentered'>".$donnees['e_tarif']." </th>
+                                <th class='is-vcentered'>".$donnees['e_tarif']." €</th>
                                 <th class='is-vcentered'>".$donnees['e_date_depart']." </th>
                                 <th class='is-vcentered'>".$donnees['e_date_arrivee']." </th>
                                 <th class='is-vcentered'>
                                 <form action='' method='post'>
                                     <div class='field'>
                                         <div class='control'>
-                                            <button type ='submit' class='button is-success' onclick=\"return confirm('Vous allez reserver l\'excursion ".$donnees['e_nom']."');\" name='book' value='".$donnees['e_id']."'>Reserver</button>
+                                            <button type ='submit' class='button is-success' onclick=\"return confirm('Vous allez reserver l\'excursion ".$donnees['e_nom']."');\" name='book' value='".$donnees['e_id']."'>Book</button>
                                         </div>
                                     </div>
                                 </form>
@@ -76,7 +76,7 @@ if (!isset($_SESSION["login"]) || $_SESSION["login"]===false){
                     $content .= "</table>
         ";        
     } else {
-        $title = "<h2 class='title is-2 has-text-centered'>Gestion de vos excursions</h2>";
+        $title = "<h2 class='title is-2 has-text-centered'>Excursion's management</h2>";
         $content = " 
         <div class='column'>$title
         <div class='table-container'>
@@ -84,11 +84,11 @@ if (!isset($_SESSION["login"]) || $_SESSION["login"]===false){
                     <thead>
                         <tr>
                             <th>Pos</th>
-                            <th><a href='?action=list&ord=name'>Nom</a></th>
-                            <th>Point de départ</th>
-                            <th>Point d'arrivée</th>
-                            <th><a href='?action=list&ord=dd'>Date de départ</a></th>
-                            <th><a href='?action=list&ord=da'>Date d'arrivée</a></th>
+                            <th><a href='?action=list&ord=name'>Name</a></th>
+                            <th>Starting point</th>
+                            <th>End point</th>
+                            <th><a href='?action=list&ord=dd'>Start</a></th>
+                            <th><a href='?action=list&ord=da'>End</a></th>
                             <th>Action</th>      
                             <th>
                             <form action='' method='get'>

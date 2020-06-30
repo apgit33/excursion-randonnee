@@ -49,21 +49,21 @@ if($action =='add' && isset($_GET['id']) && isset($_GET['type'])) {
         $e_nom = $donnees2['e_nom'];
     }
     if($_GET['type']=='r') {
-    $title = "<h2 class='title is-2 has-text-centered'>Ajout d'un randonneur pour l'excursion :  $e_nom</h2>";
+    $title = "<h2 class='title is-2 has-text-centered'>Booking hikers for the excursion :  $e_nom</h2>";
     $content = "   
     <div class='column'>$title
     <div class='table-container'>
         <table class='table is-mobile is-striped'>
             <thead>
             <tr>
-                <th><a href='?action=list&ord=name'>Nom</a></th>
-                <th>Prénom</th>
+                <th><a href='?action=list&ord=name'>First Name</a></th>
+                <th>Last Name</th>
                 <th>Email</th>
                 <th>Action</th>
                 <th>
                     <form>
                         <div class='control'>
-                            <button type ='submit' class='button is-danger'>Annuler</button>
+                            <button type ='submit' class='button is-danger' name='cancel'>Cancel</button>
                         </div>
                     </form>
                 </th>
@@ -83,7 +83,7 @@ if($action =='add' && isset($_GET['id']) && isset($_GET['type'])) {
                                 <form action='' method='post'>
                                     <div class='field'>
                                         <div class='control'>
-                                            <button type ='submit' class='button is-success' onclick=\"return confirm('Confirmez la réservation');\" name='book' value='".$donnees['r_id']."'>Reserver</button>
+                                            <button type ='submit' class='button is-success' onclick=\"return confirm('Confirmez la réservation');\" name='book' value='".$donnees['r_id']."'>Book</button>
                                         </div>
                                     </div>
                                 </form>
@@ -95,21 +95,21 @@ if($action =='add' && isset($_GET['id']) && isset($_GET['type'])) {
                 </div>
                 ";
     }elseif ($_GET['type']=='g'){
-    $title = "<h2 class='title is-2'>Ajout d'un guide pour l'excursion :  $e_nom</h2>";
+    $title = "<h2 class='title is-2'>Booking a guide for the excursion :  $e_nom</h2>";
     $content = "   
     <div class='column'>$title
     <div class='table-container'>
         <table class='table is-mobile is-striped'>
             <thead>
             <tr>
-                <th><a href='?action=list&ord=name'>Numéro</a></th>
-                <th>Nom</th>
-                <th>Téléphone</th>
+                <th><a href='?action=list&ord=name'>Number</a></th>
+                <th>Name</th>
+                <th>Phone</th>
                 <th>Action</th>          
                 <th>
                     <form>
                         <div class='control'>
-                            <button type ='submit' class='button is-danger'>Annuler</button>
+                            <button type ='submit' class='button is-danger' name='cancel'>Cancel</button>
                         </div>
                     </form>
                 </th>
@@ -129,7 +129,7 @@ if($action =='add' && isset($_GET['id']) && isset($_GET['type'])) {
                                 <form action='' method='post'>
                                     <div class='field'>
                                         <div class='control'>
-                                            <button type ='submit' class='button is-success' onclick=\"return confirm('Confirmez la réservation');\" name='book' value='".$donnees['g_numero']."'>Reserver</button>
+                                            <button type ='submit' class='button is-success' onclick=\"return confirm('Confirmez la réservation');\" name='book' value='".$donnees['g_numero']."'>Book</button>
                                         </div>
                                     </div>
                                 </form>
@@ -144,13 +144,13 @@ if($action =='add' && isset($_GET['id']) && isset($_GET['type'])) {
     }
 
 }else {
-    $title = "<h2 class='title is-2 has-text-centered'>Gestion des réservations pour les excursions</h2>";
+    $title = "<h2 class='title is-2 has-text-centered'>Reservations management for excursions</h2>";
     $content = "   
     <div class='column'>$title
     <div class='column'>
             <div class='column is-half  is-offset-one-quarter'>
                 <div class='field'>
-                    <label for='id' class='label'>Nom :</label>
+                    <label for='id' class='label'>Name :</label>
                 </div>        
             <form action='' method='GET'>
 
@@ -172,7 +172,7 @@ if($action =='add' && isset($_GET['id']) && isset($_GET['type'])) {
                         </div>
                     </div>
                     <div class='control'>
-                        <button type ='submit' class='button is-success' value ='$id'>Show</button>
+                        <button type ='submit' class='button is-success' value ='$id' name='show'>Show</button>
                     </div>
                 </div>
                 </form>
@@ -193,8 +193,8 @@ if($action =='add' && isset($_GET['id']) && isset($_GET['type'])) {
                             <thead>
                                 <tr>
                                     <th>Pos</th>
-                                    <th>Nom</th>
-                                    <th>Prenom</th>
+                                    <th>First Name</th>
+                                    <th>Last Name</th>
                                     <th>Email</th>
                                     <th>Action</th>";
                                     if($max>0) {
@@ -264,8 +264,8 @@ if($action =='add' && isset($_GET['id']) && isset($_GET['type'])) {
                             <thead>
                                 <tr>
                                     <th>Pos</th>
-                                    <th>Nom</th>
-                                    <th>Telephone</th>
+                                    <th>Name</th>
+                                    <th>Phone</th>
                                     <th>Action</th>
                                     <th>
                                         <div class='field'>

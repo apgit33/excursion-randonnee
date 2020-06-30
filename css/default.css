@@ -1,11 +1,13 @@
-.columns, table {
+.columns, .mr-auto {
   margin: auto; }
 
-.card {
+table {
+  width: 100%; }
+
+.card_user {
   width: 320px;
   margin: auto;
-  margin-bottom: 40px;
-  margin-right: 10px; }
+  margin-bottom: 40px; }
 
 .d-flex {
   display: flex;
@@ -20,5 +22,35 @@
 
 h1 {
   margin-left: 10px; }
+
+.card-admin {
+  margin: 0 auto; }
+
+.form-login {
+  border-radius: 15px;
+  box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24); }
+
+.h-100 {
+  height: 100vh; }
+
+.verif {
+  color: red; }
+
+.liste {
+  width: 50%; }
+
+[type="checkbox"] {
+  margin-left: 10px; }
+
+.button[name$=edit], .button[name$=delete], .button[name$=cancel], .button[name$=add], .button[name$=show], .button[name$=book], .button[name$=add_entry], .button[name$=action] {
+  width: 80px; }
+
+@media screen and (max-width: 767.8896px) {
+  .form-login {
+    border-radius: 0;
+    box-shadow: none; } }
+@media screen and (max-width: 1216.8898px) {
+  .is-hidden-mobile {
+    display: none; } }
 
 /*# sourceMappingURL=default.css.map */
