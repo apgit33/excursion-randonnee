@@ -199,5 +199,6 @@ echo "
     </div>       
 </div>       
 </main>
+<script src='./src/script-menu.js'></script>
 </body>
 </html>";

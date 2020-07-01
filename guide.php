@@ -158,5 +158,6 @@ echo "
             </div>       
             </main>
         <script src='./src/guide.js'></script>
+        <script src='./src/script-menu.js'></script>
         </body>
 </html>";

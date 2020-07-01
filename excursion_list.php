@@ -181,5 +181,6 @@ if (!isset($_SESSION["login"]) || $_SESSION["login"]===false){
             </div>       
             </main>
         <script src='./src/randonneur.js'></script>
+        <script src='./src/script-menu.js'></script>
     </body>
 </html>";

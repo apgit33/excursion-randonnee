@@ -370,5 +370,6 @@ if($action =='add' && isset($_GET['id']) && isset($_GET['type'])) {
                 </div>       
             </div>       
             </main>
-</body>
+            <script src='./src/script-menu.js'></script>
+            </body>
 </html>";

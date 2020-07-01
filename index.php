@@ -49,7 +49,7 @@ if(isset($_SESSION['login']) && $_SESSION['login']===true){
                 </div>
                 <div class='field'>
                     <div class='control'>
-                        <input type='submit' class='input is-success button is-centered' value='Login'>
+                        <input type='submit' class='input is-success button is-centered' name='login' value='Login'>
                     </div>
                 </div>
             </form>

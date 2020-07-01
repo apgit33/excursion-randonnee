@@ -323,5 +323,6 @@ if (!isset($_SESSION["admin"]) || $_SESSION["admin"]===false){
                 </div>       
                 </main>
             <script src='./src/excursion.js'></script>
+        <script src='./src/script-menu.js'></script>
         </body>
         </html>";

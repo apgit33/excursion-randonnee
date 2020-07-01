@@ -90,5 +90,6 @@ if(isset($_SESSION['admin']) && $_SESSION['admin']===true){
     </div>       
     </main>
     <script src='./src/randonneur.js'></script>
+    <script src='./src/script-menu.js'></script>
 </body>
 </html>

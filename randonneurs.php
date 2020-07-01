@@ -186,5 +186,6 @@ echo "
             </div>       
             </main>
         <script src='./src/randonneur.js'></script>
+        <script src='./src/script-menu.js'></script>
     </body>
 </html>";
