@@ -94,7 +94,7 @@ if (!isset($_SESSION["login"]) || $_SESSION["login"]===false){
                             <form action='' method='get'>
                                 <div class='field'>
                                     <div class='control'>
-                                        <button type ='submit' class='button is-success' name='action' value='add'>Nouvelle réservation</button>
+                                        <button type ='submit' class='button is-success' name='action' value='add'>Add</button>
                                     </div>
                                 </div>
                             </form>
