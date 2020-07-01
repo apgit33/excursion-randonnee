@@ -34,7 +34,7 @@ if(isset($_POST['book'])){
             $query = "INSERT INTO nc_booking VALUE (?,?)";
             executeSQL($query,array($_POST['book'],$id));     
         }else{
-            $erreurs = "<p>Sorry, there are no more places available for this excursion</p>";
+            $erreurs = "<p class='verif'>Sorry, there are no more places available for this excursion</p>";
         }
     } else if ($_GET['type']=='g') {
         $query = "INSERT INTO nc_guidemeneexcursion VALUE (?,?)";
@@ -51,7 +51,7 @@ if($action =='add' && isset($_GET['id']) && isset($_GET['type'])) {
     if($_GET['type']=='r') {
     $title = "<h2 class='title is-2 has-text-centered'>Booking hikers for the excursion :  $e_nom</h2>";
     $content = "   
-    <div class='column'>$title
+    <div class='column'><div>$erreurs</div>$title
     <div class='table-container'>
         <table class='table is-mobile is-striped'>
             <thead>
