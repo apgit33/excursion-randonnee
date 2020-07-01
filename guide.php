@@ -85,7 +85,7 @@ if (!isset($_SESSION["admin"]) || $_SESSION["admin"]===false){
                     </div></div>";
                 }
     } else {
-        $title = "<h2 class='title is-2 has-text-centered'>Affichage des guides</h2>";
+        $title = "<h2 class='title is-2 has-text-centered'>Listing of guides</h2>";
         $content = "   
         <div class='column'>$title
         <div class='column'>
@@ -94,9 +94,9 @@ if (!isset($_SESSION["admin"]) || $_SESSION["admin"]===false){
                     <thead>
                         <tr>
                             <th>Pos</th>
-                            <th>Numéro</th>
-                            <th>Nom</th>
-                            <th>Telephone</th>
+                            <th>Number</th>
+                            <th>Name</th>
+                            <th>Phone</th>
                             <th>Action</th>
                         </tr>
                     </thead>
@@ -116,17 +116,34 @@ if (!isset($_SESSION["admin"]) || $_SESSION["admin"]===false){
                             <th class='is-vcentered'>".$donnees['g_nom']."</th>
                             <th class='is-vcentered'>".$donnees['g_telephone']."</th>
                             <th>
+                            <div class='field is-grouped'>
                                 <form action='' method='post'>
-                                    <div class='field is-grouped'>
-                                        <div class='control'>
-                                            <button type ='submit' class='button is-success' name='edit' value='$id'>Edit</button>
-                                        </div>
-                                        <div class='control'>
-                                            <button type ='submit' class='button is-danger' onclick=\"return confirm('Are u sure, there is no rolling back !!');\" name='delete' value='$id'>Delete</button>
-                                        </div>
+                                    <div class='control'>
+                                        <button type ='submit' class='button is-success' name='edit' value='$id'>Edit</button>
                                     </div>
                                 </form>
-                            </th>
+                                <div class='control'>
+                                    <button class='button is-danger' name='delete' onclick=\"document.getElementById('id$pos').style.display='block'\" >Delete</button>
+                                </div>
+                            </div>
+                        <div id='id$pos' class='modal'>
+                            <form class='modal-content' action='' method='post'>
+                                <div class='container-modal'>
+                                <p class='title is-3'>Delete guide ".$donnees['g_nom']."</p>
+                                <p class='title is-4'>Are you sure you want to delete this guide ?</p>
+                                    <div class='buttons is-centered'>
+                                        <div class='control'>
+                                            <button type='submit' class='button is-success' name ='cancel'>Cancel</button>
+                                        </div>
+                                        <div class='control'>
+                                            <button type='submit' class='button is-danger' name='delete' value='$id'>Delete</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                          <button class='modal-close is-large' aria-label='close' onclick=\"document.getElementById('id$pos').style.display='none'\"></button>
+                        </div> 
+                    </th>
                         </tr>
                         ";$pos++;
                     }
@@ -141,5 +158,5 @@ echo "
             </div>       
             </main>
         <script src='./src/guide.js'></script>
-    </body>
+        </body>
 </html>";

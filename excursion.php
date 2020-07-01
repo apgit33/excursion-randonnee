@@ -200,7 +200,7 @@ if (!isset($_SESSION["admin"]) || $_SESSION["admin"]===false){
                 </div></div>";
         }
     } else {
-        $title = "<h2 class='title is-2 has-text-centered'>Affichage des excursions</h2>";
+        $title = "<h2 class='title is-2 has-text-centered'>Listing of excursions</h2>";
         $content = " 
         <div class='column'>$title
         <div class='table-container'>
@@ -281,17 +281,34 @@ if (!isset($_SESSION["admin"]) || $_SESSION["admin"]===false){
                             }
                             
                         $content.= " </th>
-                            <th>
-                                <form action='' method='post'>
+                                    <th>
                                     <div class='field is-grouped'>
+                                        <form action='' method='post'>
+                                            <div class='control'>
+                                                <button type ='submit' class='button is-success' name='edit' value='".$donnees['e_id']."'>Edit</button>
+                                            </div>
+                                        </form>
                                         <div class='control'>
-                                            <button type ='submit' class='button is-success' name='edit' value='".$donnees['e_id']."'>Edit</button>
-                                        </div<
-                                        <div class='control'>
-                                            <button type ='submit' class='button is-danger' onclick=\"return confirm('Are u sure, there is no rolling back !!');\" name='delete' value='".$donnees['e_id']."'>Delete</button>
+                                            <button class='button is-danger' name='delete' onclick=\"document.getElementById('id$pos').style.display='block'\" >Delete</button>
                                         </div>
                                     </div>
-                                </form>
+                                <div id='id$pos' class='modal'>
+                                    <form class='modal-content' action='' method='post'>
+                                        <div class='container-modal'>
+                                            <p class='title is-3'>Delete Excursion ".$donnees['e_nom']."</p>
+                                            <p class='title is-4'>Are you sure you want to delete this excursion ?</p>
+                                            <div class='buttons is-centered'>
+                                                <div class='control'>
+                                                    <button type='submit' class='button is-success' name ='cancel'>Cancel</button>
+                                                </div>
+                                                <div class='control'>
+                                                    <button type='submit' class='button is-danger' name='delete' value='".$donnees['e_id']."'>Delete</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </form>
+                                <button class='modal-close is-large' aria-label='close' onclick=\"document.getElementById('id$pos').style.display='none'\"></button>
+                                </div> 
                             </th>
                         </tr>
                         ";$pos++;
@@ -299,12 +316,12 @@ if (!isset($_SESSION["admin"]) || $_SESSION["admin"]===false){
                     $content .= "</table></div></div>";
                 }
             }
-            echo "
-                $content
-                </div>   
-                        </div>       
+        echo "
+            $content
+            </div>   
                     </div>       
-                    </main>
-                <script src='./src/excursion.js'></script>
-            </body>
+                </div>       
+                </main>
+            <script src='./src/excursion.js'></script>
+        </body>
         </html>";

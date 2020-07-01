@@ -62,16 +62,29 @@ if (!isset($_SESSION["login"]) || $_SESSION["login"]===false){
                                 <th class='is-vcentered'>".$donnees['e_date_depart']." </th>
                                 <th class='is-vcentered'>".$donnees['e_date_arrivee']." </th>
                                 <th class='is-vcentered'>
-                                <form action='' method='post'>
-                                    <div class='field'>
-                                        <div class='control'>
-                                            <button type ='submit' class='button is-success' onclick=\"return confirm('Vous allez reserver l\'excursion ".$donnees['e_nom']."');\" name='book' value='".$donnees['e_id']."'>Book</button>
+                                <div class='control'>
+                                    <button class='button is-success' name='book' onclick=\"document.getElementById('id$pos').style.display='block'\" >Book</button>
+                                </div>
+                                <div id='id$pos' class='modal'>
+                                    <form class='modal-content' action='' method='post'>
+                                        <div class='container-modal'>
+                                            <p class='title is-3'>Booking excursion</p>
+                                            <p class='title is-4'>You are about to reserve : ".$donnees['e_nom']."</p>
+                                            <div class='buttons is-centered'>
+                                                <div class='control'>
+                                                    <button type='submit' class='button is-danger' name ='cancel'>Cancel</button>
+                                                </div>
+                                                <div class='control'>
+                                                    <button type='submit' class='button is-success' name='book' value='".$donnees['e_id']."'>Confirm</button>
+                                                </div>
+                                            </div>
                                         </div>
-                                    </div>
-                                </form>
-                                </th>
+                                    </form>
+                                <button class='modal-close is-large' aria-label='close' onclick=\"document.getElementById('id$pos').style.display='none'\"></button>
+                                </div> 
+                            </th>
                             </tr>
-                        ";
+                        ";$pos++;
                     }
                     $content .= "</table>
         ";        
@@ -130,18 +143,29 @@ if (!isset($_SESSION["login"]) || $_SESSION["login"]===false){
                             <th class='is-vcentered'>".$donnees['e_point_arrivee']." </th>
                             <th class='is-vcentered'>".$donnees['e_date_depart']." </th>
                             <th class='is-vcentered'>".$donnees['e_date_arrivee']." </th>
-                            <th>
-                            <form action='' method='post'>
-                                <div class='field'>
-                                    <div class='control'>
-                                        <input type='hidden' name='e_date' value='".$donnees['e_date_depart']."'>
-                                    </div>
-                                    <div class='control'>
-                                        <button type ='submit' class='button is-danger' onclick=\"return confirm('Are u sure, there is no rolling back !!');\" name='delete' value='".$donnees['e_id']."'>Delete</button>
-                                    </div>
+                            <th class='is-vcentered'>
+                                <div class='control'>
+                                    <button class='button is-danger' name='delete' onclick=\"document.getElementById('id$pos').style.display='block'\" >Delete</button>
                                 </div>
-                            </form>
-                        </th>
+                                <div id='id$pos' class='modal'>
+                                    <form class='modal-content' action='' method='post'>
+                                        <div class='container-modal'>
+                                            <p class='title is-3'>Booking excursion</p>
+                                            <p class='title is-4'>You are about to delete : ".$donnees['e_nom']."</p>
+                                            <div class='buttons is-centered'>
+                                                <div class='control'>
+                                                    <button type='submit' class='button is-success' name ='cancel'>Cancel</button>
+                                                </div>
+                                                <input type='hidden' name='e_date' value='".$donnees['e_date_depart']."'>
+                                                <div class='control'>
+                                                    <button type='submit' class='button is-danger' name='delete' value='".$donnees['e_id']."'>Confirm</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </form>
+                                <button class='modal-close is-large' aria-label='close' onclick=\"document.getElementById('id$pos').style.display='none'\"></button>
+                                </div> 
+                            </th>
                         </tr>
                         ";$pos++;
                     }

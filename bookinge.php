@@ -80,14 +80,27 @@ if($action =='add' && isset($_GET['id']) && isset($_GET['type'])) {
                                 <th class='is-vcentered'>".$donnees['r_prenom']." </th>
                                 <th class='is-vcentered'>".$donnees['r_email']." </th>
                                 <th class='is-vcentered'>
-                                <form action='' method='post'>
-                                    <div class='field'>
-                                        <div class='control'>
-                                            <button type ='submit' class='button is-success' onclick=\"return confirm('Confirmez la réservation');\" name='book' value='".$donnees['r_id']."'>Book</button>
+                                <div class='control'>
+                                    <button class='button is-success' name='book' onclick=\"document.getElementById('id$pos').style.display='block'\" >Book</button>
+                                </div>
+                                <div id='id$pos' class='modal'>
+                                    <form class='modal-content' action='' method='post'>
+                                        <div class='container-modal'>
+                                            <p class='title is-3'>Booking excursion</p>
+                                            <p class='title is-4'>You are about to reserve : $e_nom</p>
+                                            <div class='buttons is-centered'>
+                                                <div class='control'>
+                                                    <button type='submit' class='button is-danger' name ='cancel'>Cancel</button>
+                                                </div>
+                                                <div class='control'>
+                                                    <button type='submit' class='button is-success' name='book' value='".$donnees['r_id']."'>Confirm</button>
+                                                </div>
+                                            </div>
                                         </div>
-                                    </div>
-                                </form>
-                                </th>
+                                    </form>
+                                <button class='modal-close is-large' aria-label='close' onclick=\"document.getElementById('id$pos').style.display='none'\"></button>
+                                </div> 
+                            </th>
                             </tr>
                         ";
                     }
@@ -126,14 +139,27 @@ if($action =='add' && isset($_GET['id']) && isset($_GET['type'])) {
                                 <th class='is-vcentered'>".$donnees['g_nom']." </th>
                                 <th class='is-vcentered'>".$donnees['g_telephone']." </th>
                                 <th class='is-vcentered'>
-                                <form action='' method='post'>
-                                    <div class='field'>
-                                        <div class='control'>
-                                            <button type ='submit' class='button is-success' onclick=\"return confirm('Confirmez la réservation');\" name='book' value='".$donnees['g_numero']."'>Book</button>
+                                <div class='control'>
+                                    <button class='button is-success' name='book' onclick=\"document.getElementById('id$pos').style.display='block'\" >Book</button>
+                                </div>
+                                <div id='id$pos' class='modal'>
+                                    <form class='modal-content' action='' method='post'>
+                                        <div class='container-modal'>
+                                            <p class='title is-3'>Booking excursion</p>
+                                            <p class='title is-4'>You are about to reserve</p>
+                                            <div class='buttons is-centered'>
+                                                <div class='control'>
+                                                    <button type='submit' class='button is-danger' name ='cancel'>Cancel</button>
+                                                </div>
+                                                <div class='control'>
+                                                    <button type='submit' class='button is-success' name='book' value='".$donnees['g_numero']."'>Confirm</button>
+                                                </div>
+                                            </div>
                                         </div>
-                                    </div>
-                                </form>
-                                </th>
+                                    </form>
+                                <button class='modal-close is-large' aria-label='close' onclick=\"document.getElementById('id$pos').style.display='none'\"></button>
+                                </div> 
+                            </th>
                             </tr>
                         ";
                     }
@@ -225,38 +251,44 @@ if($action =='add' && isset($_GET['id']) && isset($_GET['type'])) {
 
                 $query = "SELECT r_id,r_nom,r_prenom,r_email FROM `nc_randonneur` INNER JOIN nc_booking ON r_id = b_r_id WHERE b_e_id = ?";
                 $reponse = executeSQL($query,array($id));
-                $i = 1;
                 while ($donnees = $reponse->fetch()) {
                     
                     $content .= "
                     <tr>
-                        <th class='is-vcentered'>$i</th>
+                        <th class='is-vcentered'>$pos</th>
                         <th class='is-vcentered'>".$donnees['r_nom']." </th>
                         <th class='is-vcentered'>".$donnees['r_prenom']." </th>
                         <th class='is-vcentered'>".$donnees['r_email']." </th>
                         <th>
-                            <form action='' method='post'>
-                                <div class='field'>
-                                <div class='control'>
-                                    <input type ='hidden' name='type' value='r'>
-                                </div>
-                                    <div class='control'>
-                                        <button type ='submit' class='button is-danger' onclick=\"return confirm('Are u sure, there is no rolling back !!');\" name='delete' value='".$donnees['r_id']."'>Delete</button>
+                            <div class='control'>
+                                <button class='button is-danger' name='delete' onclick=\"document.getElementById('id$pos$pos').style.display='block'\" >Delete</button>
+                            </div>
+                            <div id='id$pos$pos' class='modal'>
+                                <form class='modal-content' action='' method='post'>
+                                    <div class='container-modal'>
+                                        <p class='title is-3'>Delete Reservation</p>
+                                        <p class='title is-4'>Are you sure you want to delete this hiker's reservation ?</p>
+                                        <div class='buttons is-centered'>
+                                            <div class='control'>
+                                                <button type='submit' class='button is-success' name ='cancel'>Cancel</button>
+                                            </div>
+                                                <input type ='hidden' name='type' value='r'>
+                                            <div class='control'>
+                                                <button type='submit' class='button is-danger' name='delete' value='".$donnees['r_id']."'>Delete</button>
+                                            </div>
+                                        </div>
                                     </div>
-                                </div>
-                            </form>
+                                </form>
+                            <button class='modal-close is-large' aria-label='close' onclick=\"document.getElementById('id$pos$pos').style.display='none'\"></button>
+                            </div> 
                         </th>
                     </tr>
                     ";
-                    $i++;
+                    $pos++;
                 }
                 $content .= "</table>
                 </div>
                 </div>
-                ";
-
-
-                $content .= "
                 <div class='table-container'>
 
                             <table class='table is-mobile is-striped'>
@@ -290,29 +322,39 @@ if($action =='add' && isset($_GET['id']) && isset($_GET['type'])) {
                             ";
                 $query = "SELECT g_nom,g_numero FROM `nc_guide` INNER JOIN nc_guidemeneexcursion ON g_numero = ge_g_numero WHERE ge_e_id = ?";
                 $reponse = executeSQL($query,array($id));
-                $i = 1;
                 while ($donnees = $reponse->fetch()) {
                     
                     $content .= "
                     <tr>
-                        <th class='is-vcentered'>$i</th>
+                        <th class='is-vcentered'>$pos</th>
                         <th class='is-vcentered'>".$donnees['g_nom']." </th>
                         <th class='is-vcentered'>".$donnees['g_numero']." </th>
                         <th>
-                            <form action='' method='post'>
-                                <div class='field'>
-                                <div class='control'>
-                                    <input type ='hidden' name='type' value='g'>
-                                </div>
-                                    <div class='control'>
-                                        <button type ='submit' class='button is-danger' onclick=\"return confirm('Are u sure, there is no rolling back !!');\" name='delete' value='".$donnees['g_numero']."'>Delete</button>
+                            <div class='control'>
+                                <button class='button is-danger' name='delete' onclick=\"document.getElementById('id$pos$pos$pos').style.display='block'\" >Delete</button>
+                            </div>
+                            <div id='id$pos$pos$pos' class='modal'>
+                                <form class='modal-content' action='' method='post'>
+                                    <div class='container-modal'>
+                                        <p class='title is-3'>Delete Reservation</p>
+                                        <p class='title is-4'>Are you sure you want to delete this guide's reservation ?</p>
+                                        <div class='buttons is-centered'>
+                                            <div class='control'>
+                                                <button type='submit' class='button is-success' name ='cancel'>Cancel</button>
+                                            </div>
+                                                <input type ='hidden' name='type' value='g'>
+                                            <div class='control'>
+                                                <button type='submit' class='button is-danger' name='delete' value='".$donnees['g_numero']."'>Delete</button>
+                                            </div>
+                                        </div>
                                     </div>
-                                </div>
-                            </form>
+                                </form>
+                            <button class='modal-close is-large' aria-label='close' onclick=\"document.getElementById('id$pos$pos$pos').style.display='none'\"></button>
+                            </div> 
                         </th>
                     </tr>
                     ";
-                    $i++;
+                    $pos++;
                 }
                 $content .= "</table>
                 </div>
@@ -322,11 +364,11 @@ if($action =='add' && isset($_GET['id']) && isset($_GET['type'])) {
             }
         }
     }
-            echo "
-                $content
-                </div>   
-                        </div>       
-                    </div>       
-                    </main>
-            </body>
-        </html>";
+    echo "
+        $content
+        </div>   
+                </div>       
+            </div>       
+            </main>
+</body>
+</html>";

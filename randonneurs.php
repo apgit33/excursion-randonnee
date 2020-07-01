@@ -103,19 +103,19 @@ if (!isset($_SESSION["admin"]) || $_SESSION["admin"]===false){
                         <div class='field is-grouped'>
                             <div class='control'>
                             <input type ='hidden' name='id' value='".$donnees['r_id']."'>
-                        </div>
+                            </div>
                             <div class='control'>
                                 <button type ='submit' class='button is-success' name='edit'>Edit</button>
                             </div>
                             <div class='control'>
-                                <button type ='submit' class='button is-danger' name='cancel'>Cancel</button>
+                            <a href='randonneurs.php' class='button is-danger' name='cancel'>Cancel</a>
                             </div>
                         </div>
                     </form>
                     </div></div>";
             }
         } else {
-            $title = "<h2 class='title is-2 has-text-centered'>Display of Hikers</h2>";
+            $title = "<h2 class='title is-2 has-text-centered'>Listing of Hikers</h2>";
             $content = " 
             <div class='column'>$title
             <div class='table-container'>
@@ -145,16 +145,33 @@ if (!isset($_SESSION["admin"]) || $_SESSION["admin"]===false){
                             <th class='is-vcentered'>".$donnees['r_email']." </th>
                             <th class='is-vcentered'>".$donnees['r_password']." </th>
                             <th>
-                                <form action='' method='post'>
                                     <div class='field is-grouped'>
+                                        <form action='' method='post'>
+                                            <div class='control'>
+                                                <button type ='submit' class='button is-success' name='edit' value='".$donnees['r_id']."'>Edit</button>
+                                            </div>
+                                        </form>
                                         <div class='control'>
-                                            <button type ='submit' class='button is-success' name='edit' value='".$donnees['r_id']."'>Edit</button>
-                                        </div>
-                                        <div class='control'>
-                                            <button type ='submit' class='button is-danger' onclick=\"return confirm('Are u sure, there is no rolling back !!');\" name='delete' value='".$donnees['r_id']."'>Delete</button>
+                                            <button class='button is-danger' name='delete' onclick=\"document.getElementById('id$pos').style.display='block'\" >Delete</button>
                                         </div>
                                     </div>
-                                </form>
+                                <div id='id$pos' class='modal'>
+                                    <form class='modal-content' action='' method='post'>
+                                        <div class='container-modal'>
+                                            <p class='title is-3'>Delete ".$donnees['r_nom']."&nbsp;".$donnees['r_prenom']."</p>
+                                            <p class='title is-4'>Are you sure you want to delete this hiker ?</p>
+                                            <div class='buttons is-centered'>
+                                                <div class='control'>
+                                                    <button type='submit' class='button is-success' name ='cancel'>Cancel</button>
+                                                </div>
+                                                <div class='control'>
+                                                    <button type='submit' class='button is-danger' name='delete' value='".$donnees['r_id']."'>Delete</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </form>
+                                  <button class='modal-close is-large' aria-label='close' onclick=\"document.getElementById('id$pos').style.display='none'\"></button>
+                                </div> 
                             </th>
                         </tr>
                         ";$pos++;
