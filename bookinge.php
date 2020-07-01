@@ -172,7 +172,7 @@ if($action =='add' && isset($_GET['id']) && isset($_GET['type'])) {
                         </div>
                     </div>
                     <div class='control'>
-                        <button type ='submit' class='button is-success' value ='$id' name='show'>Show</button>
+                        <button type ='submit' class='button is-success' value ='$id'>Show</button>
                     </div>
                 </div>
                 </form>
@@ -265,7 +265,7 @@ if($action =='add' && isset($_GET['id']) && isset($_GET['type'])) {
                                 <tr>
                                     <th>Pos</th>
                                     <th>Name</th>
-                                    <th>Phone</th>
+                                    <th>Number</th>
                                     <th>Action</th>
                                     <th>
                                         <div class='field'>
