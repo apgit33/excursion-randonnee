@@ -53,9 +53,45 @@ h1 {margin-left: 10px;}
 [type="checkbox"] {
     margin-left: 10px;
 }
-.button[name$=edit],.button[name$=delete],.button[name$=cancel],.button[name$=add],.button[name$=show],.button[name$=book],.button[name$=add_entry],.button[name$=action] {
+.button:not([name$=login]){
     width: 80px;
 
+}
+  
+  /* Add padding and center-align text to the container */
+  .container-modal {
+    padding: 16px;
+    text-align: center;
+  }
+  
+  /* The Modal (background) */
+  .modal {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 99; /* Sit on top */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    overflow: hidden; /* Enable scroll if needed */
+    background-color: #4c5b7aec;
+    padding-top: 50px;
+    opacity: 97%;
+  }
+  
+  /* Modal Content/Box */
+  .modal-content {
+    background-color: #fefefe;
+    margin: 5% auto 15% auto; /* 5% from the top, 15% from the bottom and centered */
+    border: 1px solid #888;
+    width: 25%; /* Could be more or less, depending on screen size */
+  }
+
+
+.navbar-menu {
+    display: none;
+}
+.navbar-item img {
+    max-height: 100%;
 }
 
 @media screen and (max-width:767.8896px) { 
@@ -71,8 +107,18 @@ h1 {margin-left: 10px;}
        display: none;
    } 
 
-   .burger {
 
+   #content {
+       position: absolute;
+       width: 100%;
    }
 
+   .navbar-burger {
+       display: block;
+   }
+   .navbar-menu {
+        position: relative;
+    width: 201px;
+    float: right;
+    }
 }
