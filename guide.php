@@ -110,7 +110,7 @@ if (!isset($_SESSION["admin"]) || $_SESSION["admin"]===false){
                     while ($donnees = $reponse->fetch()) {
                         $id=$donnees['g_numero'];
                         $content .= "
-                        <tr>
+                        <tr id='guide'>
                             <th class='is-vcentered'>$pos</th>
                             <th class='is-vcentered'>".$id."</th>
                             <th class='is-vcentered'>".$donnees['g_nom']."</th>

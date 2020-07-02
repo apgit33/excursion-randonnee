@@ -138,7 +138,7 @@ if (!isset($_SESSION["admin"]) || $_SESSION["admin"]===false){
                     $reponse = executeSQL($query,array());
                     while ($donnees = $reponse->fetch()) {
                         $content .= "
-                        <tr>
+                        <tr id='rando'>
                             <th class='is-vcentered'>$pos</th>
                             <th class='is-vcentered'>".$donnees['r_nom']." </th>
                             <th class='is-vcentered'>".$donnees['r_prenom']." </th>

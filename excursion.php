@@ -247,7 +247,7 @@ if (!isset($_SESSION["admin"]) || $_SESSION["admin"]===false){
                     
                     while ($donnees = $reponse->fetch()) {
                         $content .= "
-                        <tr>
+                        <tr id='excursion'>
                             <th class='is-vcentered'>".$donnees['e_nom']." </th>
                             <th class='is-vcentered'>".$donnees['e_point_depart']." </th>
                             <th class='is-vcentered'>".$donnees['e_point_arrivee']." </th>
