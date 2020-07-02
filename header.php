@@ -20,21 +20,17 @@
                 <img src="./img/nc64x64.png" width="64" height="64">
                 <p>Natural Coach</p>
             </a>
-            <div class="navbar-end">
-                <div class="navbar-item">
-                    <div>Welcome <a href='index.php'><?=$_SESSION['user_firstname'];?></a></div>
-                </div>
-            </div>
+
+        </div>
             <a role="button" class="navbar-burger burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
                 <span aria-hidden="true"></span>
                 <span aria-hidden="true"></span>
                 <span aria-hidden="true"></span>
             </a>
-        </div>
-
         <div id='navbarBasicExample' class="navbar-menu">
             <div class="navbar-start">
                 <a href='index.php?action=logout' class="navbar-item">Logout</a>
+            <?php if(isset($_SESSION['admin']) && $_SESSION['admin']===true){?>
                 <div class="navbar-item has-dropdown is-hoverable">
                     <p class="navbar-item">Manage Hikers</p>
                     <div class="navbar-dropdown">
@@ -59,7 +55,29 @@
                         <a href='bookinge.php?action=list' class="navbar-item">Booking excursions</a>
                     </div>
                 </div>
+        <?php }else {?>               
+                <div class="navbar-item has-dropdown is-hoverable">
+                    <p class="navbar-item">Profile</p>
+                    <div class="navbar-dropdown">
+                    <a href='excursion.php?action=list' class="navbar-item">Edit your profile</a>
+                </div>          
+                <div class="navbar-item has-dropdown is-hoverable">
+                    <p class="navbar-item">Manage Excursion</p>
+                    <div class="navbar-dropdown">
+                        <a href='excursion_list.php?action=add' class="navbar-item">Excursions list</a>
+                        <a href='excursion_list.php?action=list' class="navbar-item">Your Excursions</a>
+                    </div>
+                </div>
+                <?php }?>
+                
             </div>
+            <div class="navbar-end">
+                <div class="navbar-item">
+                    <div>Welcome <a href='index.php'><?=$_SESSION['user_firstname'];?></a></div>
+                </div>
+            
+
+        </div>
         </div>
     </nav>
             <div id='content' class='columns'>
