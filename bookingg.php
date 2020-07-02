@@ -133,7 +133,6 @@ if($action =='add') {
                             <table class='table is-striped'>
                             <thead>
                                 <tr>
-                                    <th>Pos</th>
                                     <th><a href='?action=list&ord=name'>Name</a></th>
                                     <th>Action</th>
                                     <th>
@@ -156,8 +155,7 @@ if($action =='add') {
                 $reponse = executeSQL($query,array($id));
                 while ($donnees = $reponse->fetch()) {
                     $content .= "
-                    <tr>
-                        <th class='is-vcentered'>$pos</th>
+                    <tr id='bookingg'>
                         <th class='is-vcentered'>".$donnees['e_nom']."</th>
                         <th>
                             <div class='control'>

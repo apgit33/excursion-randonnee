@@ -122,7 +122,7 @@ if($action =='add') {
                         </div>
                     </div>
                     <div class='control'>
-                        <button type ='submit' class='button is-success' value ='$id' name='show'>Show</button>
+                        <button type ='submit' class='button is-success' value ='$id'>Show</button>
                     </div>
                 </div>
             </form>
@@ -135,7 +135,6 @@ if($action =='add') {
                             <table class='table is-mobile is-striped'>
                             <thead>
                                 <tr>
-                                    <th>Pos</th>
                                     <th><a href='?action=list&ord=name'>Name</a></th>
                                     <th>Action</th>
                                     <th>
@@ -158,8 +157,7 @@ if($action =='add') {
                 $reponse = executeSQL($query,array($id));
                 while ($donnees = $reponse->fetch()) {
                     $content .= "
-                    <tr>
-                        <th class='is-vcentered'>$pos</th>
+                    <tr id='bookingr'>
                         <th class='is-vcentered'>".$donnees['e_nom']." </th>
                         <th>
                             <div class='control'>

@@ -218,7 +218,6 @@ if($action =='add' && isset($_GET['id']) && isset($_GET['type'])) {
                             <caption><h3 class='title is-3'>Hikers list</h3></caption>
                             <thead>
                                 <tr>
-                                    <th>Pos</th>
                                     <th>First Name</th>
                                     <th>Last Name</th>
                                     <th>Email</th>
@@ -252,8 +251,7 @@ if($action =='add' && isset($_GET['id']) && isset($_GET['type'])) {
                 while ($donnees = $reponse->fetch()) {
                     
                     $content .= "
-                    <tr>
-                        <th class='is-vcentered'>$pos</th>
+                    <tr id='bookinger'>
                         <th class='is-vcentered'>".$donnees['r_nom']." </th>
                         <th class='is-vcentered'>".$donnees['r_prenom']." </th>
                         <th class='is-vcentered'>".$donnees['r_email']." </th>
@@ -293,7 +291,6 @@ if($action =='add' && isset($_GET['id']) && isset($_GET['type'])) {
                                 <caption><h3 class='title is-3'>Guides list</h3></caption>
                             <thead>
                                 <tr>
-                                    <th>Pos</th>
                                     <th>Name</th>
                                     <th>Number</th>
                                     <th>Action</th>
@@ -323,8 +320,7 @@ if($action =='add' && isset($_GET['id']) && isset($_GET['type'])) {
                 while ($donnees = $reponse->fetch()) {
                     
                     $content .= "
-                    <tr>
-                        <th class='is-vcentered'>$pos</th>
+                    <tr id='bookingeg'>
                         <th class='is-vcentered'>".$donnees['g_nom']." </th>
                         <th class='is-vcentered'>".$donnees['g_numero']." </th>
                         <th>
