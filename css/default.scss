@@ -29,8 +29,6 @@ h1 {margin-left: 10px;}
 .card-admin {
     // height: 170px;
     margin: 0 auto;
-
-
     // margin-bottom: 40px;
     // margin-right: 10px;
 }
@@ -55,7 +53,6 @@ h1 {margin-left: 10px;}
 }
 .button:not([name$=login]){
     width: 80px;
-
 }
   
   /* Add padding and center-align text to the container */
@@ -64,8 +61,8 @@ h1 {margin-left: 10px;}
     text-align: center;
   }
   
-  /* The Modal (background) */
-  .modal {
+/* The Modal (background) */
+.modal {
     display: none; /* Hidden by default */
     position: fixed; /* Stay in place */
     z-index: 99; /* Sit on top */
@@ -75,32 +72,35 @@ h1 {margin-left: 10px;}
     overflow: hidden; /* Enable scroll if needed */
     background-color: #4c5b7aec;
     padding-top: 50px;
-    opacity: 97%;
+    opacity: 97%;  
+
+    /* Modal Content/Box */
+    .modal-content {
+        background-color: #fefefe;
+        margin: 5% auto 15% auto; /* 5% from the top, 15% from the bottom and centered */
+        border: 1px solid #888;
+        width: 25%; /* Could be more or less, depending on screen size */
+    }
   }
   
-  /* Modal Content/Box */
-  .modal-content {
-    background-color: #fefefe;
-    margin: 5% auto 15% auto; /* 5% from the top, 15% from the bottom and centered */
-    border: 1px solid #888;
-    width: 25%; /* Could be more or less, depending on screen size */
-  }
 
+.field:not(:last-child) {
+    margin-bottom: 0;
+}
 
 .navbar-menu {
-    display: none;
+    // display: none;
 }
 .navbar-item img {
     max-height: 100%;
 }
-
-@media screen and (max-width:767.8896px) { 
-    .form-login {
-    // padding: 30px;
-        border-radius: 0;
-        box-shadow: none;
+.mr-bot0 {
+    margin-bottom: 0;
+}
+@media screen and (min-width:1216.8898px){ 
+    .navbar-menu {
+        display: none;
     }
-
 }
 @media screen and (max-width:1216.8898px) { 
    .is-hidden-mobile {
@@ -121,4 +121,13 @@ h1 {margin-left: 10px;}
     width: 201px;
     float: right;
     }
+
+}
+@media screen and (max-width:767.8896px) { 
+    .form-login {
+    // padding: 30px;
+        border-radius: 0;
+        box-shadow: none;
+    }
+
 }

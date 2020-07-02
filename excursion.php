@@ -190,7 +190,7 @@ if (!isset($_SESSION["admin"]) || $_SESSION["admin"]===false){
                 <input type='hidden' name='id' value='".$_POST['edit']."'>
                 <div class='field is-grouped'>
                     <div class='control'>
-                        <button type ='submit' class='button is-success' name='edit'>Edit</button>
+                        <button type ='submit' class='button is-success' name='edit'>Confirm</button>
                     </div>
                     <div class='control'>
                         <button type ='submit' class='button is-danger' name='cancel'>Cancel</button>
@@ -283,11 +283,11 @@ if (!isset($_SESSION["admin"]) || $_SESSION["admin"]===false){
                         $content.= " </th>
                                     <th>
                                     <div class='field is-grouped'>
-                                        <form action='' method='post'>
                                             <div class='control'>
+                                            <form action='' method='post'>
                                                 <button type ='submit' class='button is-success' name='edit' value='".$donnees['e_id']."'>Edit</button>
-                                            </div>
-                                        </form>
+                                            </form>
+                                        </div>
                                         <div class='control'>
                                             <button class='button is-danger' name='delete' onclick=\"document.getElementById('id$pos').style.display='block'\" >Delete</button>
                                         </div>

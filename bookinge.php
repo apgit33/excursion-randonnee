@@ -247,8 +247,6 @@ if($action =='add' && isset($_GET['id']) && isset($_GET['type'])) {
                             </thead>
                             <tbody>
                             ";
-
-
                 $query = "SELECT r_id,r_nom,r_prenom,r_email FROM `nc_randonneur` INNER JOIN nc_booking ON r_id = b_r_id WHERE b_e_id = ?";
                 $reponse = executeSQL($query,array($id));
                 while ($donnees = $reponse->fetch()) {

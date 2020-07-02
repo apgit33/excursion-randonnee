@@ -42,7 +42,7 @@ if (!isset($_SESSION["admin"]) || $_SESSION["admin"]===false){
                         <button type ='submit' class='button is-success' name='add_entry'>Create</button>
                     </div>
                     <div class='control'>
-                    <a href='excursion.php' class='button is-danger'>Cancel</a>
+                        <a href='excursion.php' class='button is-danger'>Cancel</a>
                     </div>
                 </div>
                 </form>
@@ -75,7 +75,7 @@ if (!isset($_SESSION["admin"]) || $_SESSION["admin"]===false){
                     <input type='hidden' name='g_num' value='".$donnees['g_numero']."'>
                     <div class='field is-grouped'>
                         <div class='control'>
-                            <button type ='submit' class='button is-success' name='edit'>Edit</button>
+                            <button type ='submit' class='button is-success' name='edit'>Confirm</button>
                         </div>
                         <div class='control'>
                         <a href='guide.php' class='button is-danger'>Cancel</a>
@@ -117,11 +117,12 @@ if (!isset($_SESSION["admin"]) || $_SESSION["admin"]===false){
                             <th class='is-vcentered'>".$donnees['g_telephone']."</th>
                             <th>
                             <div class='field is-grouped'>
-                                <form action='' method='post'>
-                                    <div class='control'>
+                                <div class='control'>
+                                    <form action='' method='post'>
                                         <button type ='submit' class='button is-success' name='edit' value='$id'>Edit</button>
-                                    </div>
-                                </form>
+                                    </form>
+                                </div>
+                                
                                 <div class='control'>
                                     <button class='button is-danger' name='delete' onclick=\"document.getElementById('id$pos').style.display='block'\" >Delete</button>
                                 </div>
