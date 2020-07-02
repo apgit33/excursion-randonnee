@@ -67,10 +67,11 @@ h1 {margin-left: 10px;}
     left: 0;
     top: 0;
     width: 100%; /* Full width */
-    overflow: hidden; /* Enable scroll if needed */
+    // overflow: hidden; /* Enable scroll if needed */
     background-color: #4c5b7aec;
     padding-top: 50px;
     opacity: 97%;  
+    overflow-y: hidden;
 
     /* Modal Content/Box */
     .modal-content {
@@ -95,6 +96,10 @@ h1 {margin-left: 10px;}
 .mr-bot0 {
     margin-bottom: 0;
 }
+
+.table th:not(:first-child) {
+    border-top: 1px solid #00000042;
+}
 @media screen and (min-width:1216.8898px){ 
     .navbar-menu {
         display: none;
@@ -114,7 +119,7 @@ h1 {margin-left: 10px;}
    }
     #menu-v {
         position: absolute;
-        z-index: 1;
+        z-index: 99;
         background-color: rgb(245, 245, 246);
         padding-left: 15px;
 
@@ -125,4 +130,107 @@ h1 {margin-left: 10px;}
         border-radius: 0;
         box-shadow: none;
     }
+}
+
+@media only screen and (max-width: 968px) {
+    .modal .modal-content, caption{
+        width: 100%;
+    }
+    table, thead, tbody, th, td, tr {
+        display: block;
+    }
+    thead tr {
+        position: absolute;
+        top: -9999px;
+        left: -9999px;
+    }
+    tr { border: 1px solid #ccc; }
+    th {
+    //     // border: none;
+    //     // border-bottom: 1px solid #eee;
+        position: relative;
+        // padding-left: 200px;
+    }
+    th:before {
+        position: absolute;
+        top: 12px;
+        left: 6px;
+        width: 200px;
+        padding-right: 40px;
+        white-space: nowrap;
+        margin-left: -150px;
+    }
+    #rando {
+        th {
+            margin-left: 100px;
+            &:before {
+                margin-left: -99px;
+            }
+        }
+        th:nth-of-type(1):before { content: "Number"; }
+        th:nth-of-type(2):before { content: "First Name"; }
+        th:nth-of-type(3):before { content: "Last Name"; }
+        th:nth-of-type(4):before { content: "Email";}
+        th:nth-of-type(5):before { content: "Password";}
+    }
+    #guide {       
+         th {
+        margin-left: 100px;
+        &:before {
+            margin-left: -80px;
+        }
+    }
+        th:nth-of-type(1):before { content: "Number"; }
+        th:nth-of-type(2):before { content: "Code"; }
+        th:nth-of-type(3):before { content: "Name"; }
+        th:nth-of-type(4):before { content: "Phone";}
+    }
+    #excursion {
+        th {
+            margin-left: 155px;
+            &:before {
+                margin-left: -154px;
+            }
+        }
+        th:nth-of-type(1):before { content: "Name"; }
+        th:nth-of-type(2):before { content: "Starting point"; }
+        th:nth-of-type(3):before { content: "End point"; }
+        th:nth-of-type(4):before { content: "Price";}
+        th:nth-of-type(5):before { content: "Hikers max";}
+        th:nth-of-type(6):before { content: "Start date";}
+        th:nth-of-type(7):before { content: "End date";}
+        th:nth-of-type(8):before { content: "Registered guides";}
+        th:nth-of-type(9):before { content: "Registered Hikers";}
+    }
+    #bookingr, #bookingg{
+        th {
+            margin-left: 100px;
+            &:before {
+                margin-left: -80px;
+            }
+        }
+        th:nth-of-type(1):before { content: "Name"; }
+    }
+    #bookinger{
+        th {
+            margin-left: 100px;
+            &:before {
+                margin-left: -99px;
+            }
+        }
+        th:nth-of-type(1):before { content: "First Name"; }
+        th:nth-of-type(2):before { content: "Last Name"; }
+        th:nth-of-type(3):before { content: "Email"; }
+    }
+    #bookingeg{
+        th {
+            margin-left: 100px;
+            &:before {
+                margin-left: -99px;
+            }
+        }
+        th:nth-of-type(1):before { content: "Name"; }
+        th:nth-of-type(2):before { content: "Code"; }
+    }
+    // .column{padding: 0;}
 }
