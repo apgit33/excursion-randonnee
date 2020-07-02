@@ -4,9 +4,6 @@
 table{
     width: 100%;
 }
-.button {
-    // width: 80px;
-}
 .card_user {
     width: 320px;
     margin: auto;
@@ -15,7 +12,7 @@ table{
 
 .d-flex {
     display: flex;
-    flex-wrap: wrap;
+    // flex-wra p: wrap;
 }
 .d-centered {
     justify-content: center;
@@ -24,13 +21,14 @@ table{
 .jc-between {
     justify-content: space-between;
 }
+.jc-around {
+    justify-content: space-around;
+}
+
 h1 {margin-left: 10px;}
 
 .card-admin {
-    // height: 170px;
     margin: 0 auto;
-    // margin-bottom: 40px;
-    // margin-right: 10px;
 }
 
 .form-login {
@@ -87,12 +85,12 @@ h1 {margin-left: 10px;}
 .field:not(:last-child) {
     margin-bottom: 0;
 }
-
-.navbar-menu {
-    // display: none;
+.header {
+    margin: 20px 20px;
+    p {align-self: center;}
 }
-.navbar-item img {
-    max-height: 100%;
+.mr-r10 {
+    margin-right: 10px;
 }
 .mr-bot0 {
     margin-bottom: 0;
@@ -107,27 +105,24 @@ h1 {margin-left: 10px;}
        display: none;
    } 
 
-
-   #content {
-       position: absolute;
-       width: 100%;
-   }
-
    .navbar-burger {
        display: block;
+       float: left;
    }
-   .navbar-menu {
-        position: relative;
-    width: 201px;
-    float: right;
-    }
+   #content {
+       clear: both;
+   }
+    #menu-v {
+        position: absolute;
+        z-index: 1;
+        background-color: rgb(245, 245, 246);
+        padding-left: 15px;
 
+    }
 }
 @media screen and (max-width:767.8896px) { 
     .form-login {
-    // padding: 30px;
         border-radius: 0;
         box-shadow: none;
     }
-
 }

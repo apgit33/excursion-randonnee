@@ -11,77 +11,25 @@
     </head>
     <body>
         <main> 
-            <div class='container'>
+        <div class='container'>
             <?php if(isset($_SESSION['login']) && $_SESSION['login']===true){?>
-
-    <nav class="navbar" role="navigation" aria-label="main navigation">
-        <div class="navbar-brand">
-            <a class="navbar-item" href="index.php">
-                <img src="./img/nc64x64.png" width="64" height="64">
-                <p>Natural Coach</p>
-            </a>
-
-        </div>
-            <a role="button" class="navbar-burger burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
-                <span aria-hidden="true"></span>
-                <span aria-hidden="true"></span>
-                <span aria-hidden="true"></span>
-            </a>
-        <div id='navbarBasicExample' class="navbar-menu">
-            <div class="navbar-start">
-                <a href='index.php?action=logout' class="navbar-item">Logout</a>
-            <?php if(isset($_SESSION['admin']) && $_SESSION['admin']===true){?>
-                <div class="navbar-item has-dropdown is-hoverable">
-                    <p class="navbar-item">Manage Hikers</p>
-                    <div class="navbar-dropdown">
-                        <a href='randonneurs.php?action=list' class="navbar-item">Hikers list</a>
-                        <a href='randonneurs.php?action=add' class="navbar-item">New Hiker</a>
-                        <a href='bookingr.php?action=list' class="navbar-item">Booking Hikers</a>
-                    </div>
-                </div>   
-                <div class="navbar-item has-dropdown is-hoverable">
-                    <p class="navbar-item">Manage Guides</p>
-                    <div class="navbar-dropdown">
-                        <a  href='guide.php?action=list' class="navbar-item">Guide list</a>
-                        <a href='guide.php?action=add' class="navbar-item">New guide</a>
-                        <a href='bookingg.php?action=list' class="navbar-item">Booking Guides</a>
-                    </div>
-                </div>    
-                <div class="navbar-item has-dropdown is-hoverable">
-                    <p class="navbar-item">Manage Excursion</p>
-                    <div class="navbar-dropdown">
-                        <a href='excursion.php?action=list' class="navbar-item">Excursions list</a>
-                        <a href='excursion.php?action=add' class="navbar-item">New excursion</a>
-                        <a href='bookinge.php?action=list' class="navbar-item">Booking excursions</a>
-                    </div>
-                </div>
-        <?php }else {?>               
-                <div class="navbar-item has-dropdown is-hoverable">
-                    <p class="navbar-item">Profile</p>
-                    <div class="navbar-dropdown">
-                    <a href='excursion.php?action=list' class="navbar-item">Edit your profile</a>
-                </div>          
-                <div class="navbar-item has-dropdown is-hoverable">
-                    <p class="navbar-item">Manage Excursion</p>
-                    <div class="navbar-dropdown">
-                        <a href='excursion_list.php?action=add' class="navbar-item">Excursions list</a>
-                        <a href='excursion_list.php?action=list' class="navbar-item">Your Excursions</a>
-                    </div>
-                </div>
-                <?php }?>
                 
-            </div>
-            <div class="navbar-end">
-                <div class="navbar-item">
-                    <div>Welcome <a href='index.php'><?=$_SESSION['user_firstname'];?></a></div>
-                </div>
-            
+                <div class='d-flex jc-between header'>
+                    <div class='d-flex jc-between d-centered'>
+                        <img src="./img/nc64x64.png" width="64" height="64" class='mr-r10'>
+                        <p>Natural Coach</p>
+                    </div>
 
-        </div>
-        </div>
-    </nav>
+                    <p>Welcome <a href='index.php'><?=$_SESSION['user_firstname'];?></a></p>
+                </div>
+            <a role="button" class="navbar-burger burger" aria-label="menu" aria-expanded="false" data-target="menu-v">
+                <span aria-hidden="true"></span>
+                <span aria-hidden="true"></span>
+                <span aria-hidden="true"></span>
+            </a>
+
             <div id='content' class='columns'>
-                <div class='column is-2 is-hidden-mobile'>
+                <div class='is-hidden-mobile' id='menu-v'>
                  <aside class='menu '>
                     <p class='menu-label'>Home</p>
                     <ul class='menu-list'>
@@ -130,7 +78,7 @@
                         <li>Manage Excursions
                             <ul>
                                 <li><a href='excursion_list.php?action=list'>Your Excursions</a></li>
-                                <li><a href='excursion_list.php?action=add'>Ur Excursions</a></li>
+                                <li><a href='excursion_list.php?action=add'>New Excursion</a></li>
                             </ul>
                         </li>
                     </ul>
