@@ -45,7 +45,7 @@ if($action =='add') {
                                 <th>
                                     <form>
                                         <div class='control'>
-                                            <button type ='submit' class='button is-danger' name='cancel'>Annuler</button>
+                                            <button type ='submit' class='button is-danger'>Cancel</button>
                                         </div>
                                     </form>
                                 </th>
@@ -76,7 +76,7 @@ if($action =='add') {
                                             <p class='title is-4'>You are about to reserve : ".$donnees['e_nom']."</p>
                                             <div class='buttons is-centered'>
                                                 <div class='control'>
-                                                    <button type='submit' class='button is-danger' name ='cancel'>Cancel</button>
+                                                    <button type='submit' class='button is-danger'>Cancel</button>
                                                 </div>
                                                 <div class='control'>
                                                     <button type='submit' class='button is-success' name='book' value='".$donnees['e_id']."'>Confirm</button>
@@ -170,7 +170,7 @@ if($action =='add') {
                                         <p class='title is-4'>Are you sure you want to delete this reservation ?</p>
                                         <div class='buttons is-centered'>
                                             <div class='control'>
-                                                <button type='submit' class='button is-success' name ='cancel'>Cancel</button>
+                                                <button type='submit' class='button is-success'>Cancel</button>
                                             </div>
                                             <div class='control'>
                                                 <button type='submit' class='button is-danger' name='delete' value='".$donnees['e_id']."'>Delete</button>

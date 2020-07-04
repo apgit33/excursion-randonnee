@@ -63,7 +63,7 @@ if($action =='add' && isset($_GET['id']) && isset($_GET['type'])) {
                 <th>
                     <form>
                         <div class='control'>
-                            <button type ='submit' class='button is-danger' name='cancel'>Cancel</button>
+                            <button type ='submit' class='button is-danger'>Cancel</button>
                         </div>
                     </form>
                 </th>
@@ -122,7 +122,7 @@ if($action =='add' && isset($_GET['id']) && isset($_GET['type'])) {
                 <th>
                     <form>
                         <div class='control'>
-                            <button type ='submit' class='button is-danger' name='cancel'>Cancel</button>
+                            <button type ='submit' class='button is-danger'>Cancel</button>
                         </div>
                     </form>
                 </th>
@@ -149,7 +149,7 @@ if($action =='add' && isset($_GET['id']) && isset($_GET['type'])) {
                                             <p class='title is-4'>You are about to reserve</p>
                                             <div class='buttons is-centered'>
                                                 <div class='control'>
-                                                    <button type='submit' class='button is-danger' name ='cancel'>Cancel</button>
+                                                    <button type='submit' class='button is-danger'>Cancel</button>
                                                 </div>
                                                 <div class='control'>
                                                     <button type='submit' class='button is-success' name='book' value='".$donnees['g_numero']."'>Confirm</button>
@@ -266,7 +266,7 @@ if($action =='add' && isset($_GET['id']) && isset($_GET['type'])) {
                                         <p class='title is-4'>Are you sure you want to delete this hiker's reservation ?</p>
                                         <div class='buttons is-centered'>
                                             <div class='control'>
-                                                <button type='submit' class='button is-success' name ='cancel'>Cancel</button>
+                                                <button type='submit' class='button is-success'>Cancel</button>
                                             </div>
                                                 <input type ='hidden' name='type' value='r'>
                                             <div class='control'>
@@ -334,7 +334,7 @@ if($action =='add' && isset($_GET['id']) && isset($_GET['type'])) {
                                         <p class='title is-4'>Are you sure you want to delete this guide's reservation ?</p>
                                         <div class='buttons is-centered'>
                                             <div class='control'>
-                                                <button type='submit' class='button is-success' name ='cancel'>Cancel</button>
+                                                <button type='submit' class='button is-success'>Cancel</button>
                                             </div>
                                                 <input type ='hidden' name='type' value='g'>
                                             <div class='control'>
