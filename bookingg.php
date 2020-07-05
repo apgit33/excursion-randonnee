@@ -35,7 +35,7 @@ if($action =='add') {
                         <thead>
                             <tr>
                                 <th>Pos</th>
-                                <th><a href='?action=list&ord=name'>Name</a></th>
+                                <th>Name</th>
                                 <th>Starting point</th>
                                 <th>End point</th>
                                 <th><a href='?action=list&ord=dd'>Start</th>
@@ -133,7 +133,7 @@ if($action =='add') {
                             <table class='table is-striped'>
                             <thead>
                                 <tr>
-                                    <th><a href='?action=list&ord=name'>Name</a></th>
+                                    <th>Name</th>
                                     <th>Action</th>
                                     <th>
                                         <div class='field'>

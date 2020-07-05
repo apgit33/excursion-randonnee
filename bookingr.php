@@ -135,7 +135,7 @@ if($action =='add') {
                             <table class='table is-mobile is-striped'>
                             <thead>
                                 <tr>
-                                    <th><a href='?action=list&ord=name'>Name</a></th>
+                                    <th>Name</th>
                                     <th>Action</th>
                                     <th>
                                         <div class='field'>

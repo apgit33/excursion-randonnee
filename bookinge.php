@@ -56,7 +56,7 @@ if($action =='add' && isset($_GET['id']) && isset($_GET['type'])) {
         <table class='table is-mobile is-striped'>
             <thead>
             <tr>
-                <th><a href='?action=list&ord=name'>First Name</a></th>
+                <th>First Name</th>
                 <th>Last Name</th>
                 <th>Email</th>
                 <th>Action</th>
@@ -115,7 +115,7 @@ if($action =='add' && isset($_GET['id']) && isset($_GET['type'])) {
         <table class='table is-mobile is-striped'>
             <thead>
             <tr>
-                <th><a href='?action=list&ord=name'>Number</a></th>
+                <th>Number</th>
                 <th>Name</th>
                 <th>Phone</th>
                 <th>Action</th>          
