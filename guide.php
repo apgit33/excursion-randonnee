@@ -5,11 +5,14 @@ if (!isset($_SESSION["admin"]) || $_SESSION["admin"]===false){
     header('Location: index.php');
     exit;
 }else{
-    $action = (isset($_GET['action']))? $_GET['action']:'list';
     require_once 'bdd.php';
     require_once 'function.php';
     include 'header.php';
     
+    $nbPage=  ceil(executeSQL("SELECT count(g_numero) FROM nc_guide",array())->fetch()[0]/$nombre);
+    $cPage = (isset($_GET['page']) && $_GET['page']<=$nbPage && $_GET['page']>0 )?$_GET['page']:1;
+
+    $action = (isset($_GET['action']))? $_GET['action']:'list';
     if(isset($_POST['delete'])) {
         $query = "DELETE FROM `nc_guide` WHERE g_numero = ?";
         executeSQL($query,array($_POST['delete']));     
@@ -93,7 +96,6 @@ if (!isset($_SESSION["admin"]) || $_SESSION["admin"]===false){
                 <table class='table is-mobile is-striped'>
                     <thead>
                         <tr>
-                            <th>Pos</th>
                             <th>Number</th>
                             <th>Name</th>
                             <th>Phone</th>
@@ -103,15 +105,13 @@ if (!isset($_SESSION["admin"]) || $_SESSION["admin"]===false){
                     <tbody>
                     ";
 
-                    $query = "SELECT g_numero, g_nom, g_telephone FROM `nc_guide` ORDER BY `g_nom`";
-
+                    $query = "SELECT g_numero, g_nom, g_telephone FROM `nc_guide` ORDER BY `g_nom`LIMIT ".(($cPage-1)*$nombre).",$nombre";
                     $reponse = executeSQL($query,array());
                     
                     while ($donnees = $reponse->fetch()) {
                         $id=$donnees['g_numero'];
                         $content .= "
                         <tr id='guide'>
-                            <th class='is-vcentered'>$pos</th>
                             <th class='is-vcentered'>".$id."</th>
                             <th class='is-vcentered'>".$donnees['g_nom']."</th>
                             <th class='is-vcentered'>".$donnees['g_telephone']."</th>
@@ -148,7 +148,9 @@ if (!isset($_SESSION["admin"]) || $_SESSION["admin"]===false){
                         </tr>
                         ";$pos++;
                     }
-        $content .= "</table></div></div></div>";
+        $content .= "</table></div>
+        ".affichePagination($cPage,$nbPage)."
+        </div></div>";
     }   
 }
 

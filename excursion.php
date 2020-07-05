@@ -4,11 +4,15 @@ if (!isset($_SESSION["admin"]) || $_SESSION["admin"]===false){
     header('Location: index.php');
     exit;
 }else{
-    $action = (isset($_GET['action']))? $_GET['action']:'list';
     require_once 'bdd.php';
     require_once 'function.php';
     include 'header.php';
-    $region ='';
+
+
+    $nbPage=  ceil(executeSQL("SELECT count(e_id) FROM nc_excursion",array())->fetch()[0]/$nombre);
+    $cPage = (isset($_GET['page']) && $_GET['page']<=$nbPage && $_GET['page']>0 )?ceil($_GET['page']):1;
+
+    $action = (isset($_GET['action']))? $_GET['action']:'list';
 
     if(isset($_POST['delete'])) {
         $query = "DELETE FROM `nc_excursion` WHERE e_id = ?";
@@ -242,7 +246,7 @@ if (!isset($_SESSION["admin"]) || $_SESSION["admin"]===false){
                             $ord = 'e_nom';
                             break;
                     }
-                    $query = "SELECT DISTINCT e_id, e_nom, e_point_depart, e_point_arrivee, e_tarif, e_randonneurs_max, e_date_depart, e_date_arrivee FROM `nc_excursion` ORDER BY $ord";
+                    $query = "SELECT DISTINCT e_id, e_nom, e_point_depart, e_point_arrivee, e_tarif, e_randonneurs_max, e_date_depart, e_date_arrivee FROM `nc_excursion` ORDER BY $ord LIMIT ".(($cPage-1)*$nombre).",$nombre";
                     $reponse = executeSQL($query,array());
                     
                     while ($donnees = $reponse->fetch()) {
@@ -313,7 +317,11 @@ if (!isset($_SESSION["admin"]) || $_SESSION["admin"]===false){
                         </tr>
                         ";$pos++;
                     }
-                    $content .= "</table></div></div>";
+                    $content .= "
+                    </table>
+                </div>
+                
+                ".affichePagination($cPage,$nbPage)."</div>";
                 }
             }
         echo "

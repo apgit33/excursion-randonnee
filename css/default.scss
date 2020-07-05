@@ -83,7 +83,7 @@ h1 {margin-left: 10px;}
   }
   
 
-.field:not(:last-child) {
+table .field:not(:last-child) {
     margin-bottom: 0;
 }
 .header {
@@ -97,9 +97,7 @@ h1 {margin-left: 10px;}
     margin-bottom: 0;
 }
 
-.table th:not(:first-child) {
-    border-top: 1px solid #00000042;
-}
+
 @media screen and (min-width:1216.8898px){ 
     .navbar-menu {
         display: none;
@@ -133,6 +131,9 @@ h1 {margin-left: 10px;}
 }
 
 @media only screen and (max-width: 968px) {
+    .table th:not(:first-child) {
+        border-top: 1px solid #00000042;
+    }
     .modal .modal-content, caption{
         width: 100%;
     }
