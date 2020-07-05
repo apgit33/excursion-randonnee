@@ -131,7 +131,6 @@ if (!isset($_SESSION["admin"]) || $_SESSION["admin"]===false){
                             <th>First Name</th>
                             <th>Last Name</th>
                             <th>Email</th>
-                            <th>Password</th>
                             <th>Action</th>
                         </tr>
                     </thead>
@@ -139,7 +138,7 @@ if (!isset($_SESSION["admin"]) || $_SESSION["admin"]===false){
                     ";
                     
 
-                    $query = "SELECT r_id, r_nom, r_prenom, r_email, r_password FROM `nc_randonneur` ORDER BY `r_nom` LIMIT ".(($cPage-1)*$nombre).",$nombre";
+                    $query = "SELECT r_id, r_nom, r_prenom, r_email FROM `nc_randonneur` ORDER BY `r_nom` LIMIT ".(($cPage-1)*$nombre).",$nombre";
                     $reponse = executeSQL($query,array());
                     while ($donnees = $reponse->fetch()) {
                         $content .= "
@@ -147,7 +146,6 @@ if (!isset($_SESSION["admin"]) || $_SESSION["admin"]===false){
                             <th class='is-vcentered'>".$donnees['r_nom']." </th>
                             <th class='is-vcentered'>".$donnees['r_prenom']." </th>
                             <th class='is-vcentered'>".$donnees['r_email']." </th>
-                            <th class='is-vcentered'>".$donnees['r_password']." </th>
                             <th class='is-vcentered'>
                                     <div class='field is-grouped'>
                                             <div class='control'>
@@ -181,7 +179,6 @@ if (!isset($_SESSION["admin"]) || $_SESSION["admin"]===false){
                         </tr>
                         ";$pos++;
                     }
-                    // var_dump(explode('?',$_SERVER['REQUEST_URI']));
             $content .= "
                         </table>
                     </div>

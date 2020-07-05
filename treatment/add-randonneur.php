@@ -20,7 +20,7 @@ if(!preg_match("#^([a-zàáâäçèéêëìíîïñòóôöùúûü]+(( |')[a-z�
     $erreurs[]['prenom'] =  "Last name size between 3 & 16 required";
 }
 
-if  (!filter_var(filter_var($email, FILTER_SANITIZE_EMAIL), FILTER_VALIDATE_EMAIL)) {  
+if  (!filter_var(filter_var($email, FILTER_SANITIZE_EMAIL), FILTER_VALIDATE_EMAIL) || $email='admin@admin.fr') {  
     $erreurs[]['email'] = "Email invalid";
 } 
 
@@ -34,8 +34,10 @@ if ($donnee = $reponse->fetch()) {
 }
 
 if (!isset($erreurs[1])) {
+    $options = ['cost' => 9];
     $query = "INSERT INTO `nc_randonneur` (`r_nom`,`r_prenom`,`r_email`,`r_password`) VALUES (?,?,?,?)";
-    executeSQL($query,array($nom,$prenom,$email,$pwd));
+
+    executeSQL($query,array($nom,$prenom,$email,password_hash($pwd,PASSWORD_BCRYPT,$options)));
     $validation = true;
 }
 

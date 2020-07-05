@@ -45,11 +45,12 @@ if ($donnee = $reponse->fetch()) {
 }
 
 if (!isset($erreurs[1])) {
+    $options = ['cost' => 9];
     $query = "UPDATE `nc_randonneur` SET `r_nom` = ?,`r_prenom` = ?,`r_email` = ?,`r_password` = ? WHERE `r_id` = ?";
     if ($co == false) {
-        executeSQL($query,array($nom,$prenom,$email,$pwd,$_POST['id']));
+        executeSQL($query,array($nom,$prenom,$email,password_hash($pwd, PASSWORD_BCRYPT, $options),$_POST['id']));
     }else {
-        executeSQL($query,array($nom,$prenom,$email,$pwd,$_SESSION['id']));
+        executeSQL($query,array($nom,$prenom,$email,password_hash($pwd, PASSWORD_BCRYPT, $options),$_SESSION['id']));
         $_SESSION['user_lastname'] = $nom;
         $_SESSION['user_firstname'] = $prenom;
     }
